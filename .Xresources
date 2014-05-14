@@ -1,0 +1,32 @@
+Xcursor.theme: Vanilla-DMZ
+
+!URxvt Settings
+
+URxvt*background: #F8F8F8
+URxvt*foreground: #282828
+URxvt*scrollBar: false
+URxvt*font: xft:envy code r:size=11
+URxvt*depth: 24
+!URxvt*inheritPixmap: true
+!URxvt*tintColor: #ffffff
+URxvt*shading: -85
+URxvt*transparent: true
+
+URxvt*color0: #464444
+URxvt*color1: #EF3460
+URxvt*color2: #00FF00
+URxvt*color3: #EFC334
+URxvt*color4: #34BDEF
+URxvt*color5: #B300FF
+URxvt*color6: #3DD8FF
+URxvt*color7: #B8B8B8
+
+URxvt*color8: #8a8888
+URxvt*color9: #F25A7D
+URxvt*color10: #99CC00
+URxvt*color11: #FF6600
+URxvt*color12: #92AAF6
+URxvt*color13: #DF92F6
+URxvt*color14: #5AF2CE
+URxvt*color15: #787878
+

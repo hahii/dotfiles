@@ -1,0 +1,16 @@
+"1.1
+
+loadplugins '\.(js|penta)$'
+group user
+highlight BufTab:hover color: #2e3330; border-bottom-left-radius: 2px; border-bottom-right-radius: 2px;
+highlight BufTabAlternate:hover color: #2e3330; border-bottom-left-radius: 2px; border-bottom-right-radius: 2px;
+highlight BufTabSelected background-repeat: no-repeat; background-size: contain, contain; background-position: 2px top; color: #000; margin: 0 !important; font-weight: bold; border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; max-width: 130px;
+highlight BufTabs color: inherit; margin: 0 !important; padding: 0 !important; overflow: hidden; font-weight: normal;
+highlight StatusLineNormal color:black;background-color:white
+set buftabs-elem=ti
+set guioptions=bCs
+set showstatuslinks=command
+set showtabline=never
+set yankshort=
+
+" vim: set ft=pentadactyl:

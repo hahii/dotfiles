@@ -1,0 +1,14 @@
+# Write your default config options here!
+
+
+#vo=opengl-hq # better quality but tearing? vdpau prevents tearing
+
+slang=jpn,jp,ja,en,eng		#sub and lang priorities, use both 2 and 3 letter
+alang=jpn,jp,ja,en,eng
+osd-level=1			#0=none, 1 +vol+seek (default), 2 +timer+percentage, 3 +total time
+osc=no				#disable on screen controls
+screenshot-format=png
+
+# set the screenshot directory and filename pattern (see man mpv for possibilities)
+# sample of pattern below: My_Video_ep02.mkv_0h35m27s
+screenshot-template=/mnt/storagetoshiba/images/mpcsnapshots/%f_%whh%wMm%wSs
