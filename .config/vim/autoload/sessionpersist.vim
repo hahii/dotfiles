@@ -6,7 +6,7 @@
 " if argc() == 0 means only run if vim is called without arguments
 
 " function to update a session, BUT ONLY IF IT ALREADY EXISTS
-function! session#UpdateSession()
+function! sessionpersist#UpdateSession()
   if argc() == 0
     let b:sessiondir = $HOME . "/.local/share/vim/session"
     let b:sessionfile = b:sessiondir . "/session.vim"
@@ -19,7 +19,7 @@ endfunction
 
 
 " function to load session on exit
-function! session#LoadSession()
+function! sessionpersist#LoadSession()
   if argc() == 0
     let b:sessiondir = $HOME . "/.local/share/vim/session"
     let b:sessionfile = b:sessiondir . "/session.vim"

@@ -1,18 +1,6 @@
 set nocompatible	" Vi incompatible settings (must be first as it affects other options)
 
 
-" change .vim, swap, backup, viminfo directories
-set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
-set directory=~/.local/share/vim/swap//,/tmp
-set backupdir=~/.local/share/vim/backup,/tmp
-set viminfo+=n~/.local/share/vim/viminfo	" old sessions will use and recreate old location
-
-" set backup files to contain timestamp in format _YYYYMMDD-HHMM
-let backupextvar = strftime("%Y%m%d-%H%M")
-let backupextvar = "set backupext=_". backupextvar
-execute backupextvar
-
-
 set backup		" keep a backup file
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set hidden		" allow multiple files by hiding instead of closing
@@ -43,6 +31,19 @@ highlight CursorLineNr ctermfg=245	" active line number colour
 highlight CursorLine cterm=NONE ctermbg=254	" current line highlight colour
 
 
+" change .vim, swap, backup, viminfo directories
+set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
+set directory=~/.local/share/vim/swap//,/tmp
+set backupdir=~/.local/share/vim/backup,/tmp
+set viminfo+=n~/.local/share/vim/viminfo	" old sessions will use and recreate old location
+
+" set backup files to contain timestamp in format _YYYYMMDD-HHMM
+let backupextvar = strftime("%Y%m%d-%H%M")
+let backupextvar = "set backupext=_". backupextvar
+execute backupextvar
+
+
+
 " ctrl-U in insert mode cannot be undone unless we break the undo with ctrl-g u
 inoremap <C-U> <C-G>u<C-U>
 
@@ -61,8 +62,9 @@ if !exists(":DiffOrig")
 endif
 
 
+
 " autoload the session when running vim
-au VimEnter * nested :call session#LoadSession()
+au VimEnter * nested :call sessionpersist#LoadSession()
 
 " autosave the session on exiting vim
-au VimLeave * nested :call session#UpdateSession()
+au VimLeave * nested :call sessionpersist#UpdateSession()
