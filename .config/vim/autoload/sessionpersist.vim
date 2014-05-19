@@ -1,11 +1,12 @@
 " Script modified from vim.wikia.com/wiki/VimTip1202
+
 " Note that this requires you to make the initial session.vim manually
 " using :mksession ~/.local/share/vim/session/session.vim ONLY the first time
 
-" the functions must start with the exact filename and a #, and be called the same way
-" if argc() == 0 means only run if vim is called without arguments
+" the functions must start with the exact filename and a #, and be called the same way from vimrc
 
-" function to update a session, BUT ONLY IF IT ALREADY EXISTS
+
+" update session ONLY IF IT ALREADY EXISTS
 function! sessionpersist#UpdateSession()
   if argc() == 0
     let b:sessiondir = $HOME . "/.local/share/vim/session"
@@ -18,7 +19,7 @@ function! sessionpersist#UpdateSession()
 endfunction
 
 
-" function to load session on exit
+" load session if vim is called without arguments (argc() == 0)
 function! sessionpersist#LoadSession()
   if argc() == 0
     let b:sessiondir = $HOME . "/.local/share/vim/session"
