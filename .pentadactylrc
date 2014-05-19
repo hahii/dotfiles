@@ -8,6 +8,7 @@ highlight BufTabSelected background-repeat: no-repeat; background-size: contain,
 highlight BufTabs color: inherit; margin: 0 !important; padding: 0 !important; overflow: hidden; font-weight: normal;
 highlight StatusLineNormal color:black;background-color:white
 set buftabs-elem=ti
+set editor=''
 set guioptions=bCs
 set showstatuslinks=command
 set showtabline=never
