@@ -169,6 +169,9 @@ Print
 alt + Print
 	scrot -s '/mnt/storagetoshiba/images/%Y-%m-%d-%H%M%S_$wx$h.png'
 
+ctrl + Print
+	~/scripts/ssupload.sh
+
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
