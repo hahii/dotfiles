@@ -163,6 +163,9 @@ super + shift + s
 super + shift + {z,x}
 	mpc -q {prev,next}
 
+super + d
+	~/scripts/timepopup.sh
+
 Print
 	scrot '/mnt/storagetoshiba/images/%Y-%m-%d-%H%M%S_$wx$h.png'
 
