@@ -4,9 +4,22 @@ loadplugins '\.(js|penta)$'
 group user
 highlight BufTab:hover color: #2e3330; border-bottom-left-radius: 2px; border-bottom-right-radius: 2px;
 highlight BufTabAlternate:hover color: #2e3330; border-bottom-left-radius: 2px; border-bottom-right-radius: 2px;
-highlight BufTabSelected background-repeat: no-repeat; background-size: contain, contain; background-position: 2px top; color: #000; margin: 0 !important; font-weight: bold; border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; max-width: 130px;
 highlight BufTabs color: inherit; margin: 0 !important; padding: 0 !important; overflow: hidden; font-weight: normal;
+highlight BufTabSelected background-repeat: no-repeat; background-size: contain, contain; background-position: 2px top; color: #000; margin: 0 !important; font-weight: bold; border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; max-width: 130px;
 highlight StatusLineNormal color:black;background-color:white
+map -count -modes=n,v a <count>H
+map -count -modes=n,v c <count><C-d>
+map -count -modes=n,v e <count>gt
+map -count -modes=n,v E <count>:tabmove<Space>+1<Return>
+map -count -modes=n,v M <Nop>
+map -count -modes=n,v p -builtin <count>P
+map -count -modes=n,v P -builtin <count>p
+map -count -modes=n,v q <count>gT
+map -count -modes=n,v Q <count>:tabmove<Space>-1<Return>
+map -count -modes=n,v s <count>L
+map -count -modes=n,v v <count><C-u>
+map -count -modes=n,v x <count>g$
+map -count -modes=n,v X <count>:tabmove<Space>$<Return>
 set buftabs-elem=ti
 set editor=''
 set guioptions=bCs
