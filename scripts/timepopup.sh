@@ -1,5 +1,5 @@
 #!/bin/bash
-popup_duration="5"
+popup_duration="3"
 
 for i in $(seq 1 ${popup_duration}); do \
 	LC_ALL="en-US.utf8" date +"%A %Y-%m-%d %H:%M:%S %Z"; \
