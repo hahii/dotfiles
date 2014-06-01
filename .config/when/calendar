@@ -1,0 +1,13 @@
+###############
+## 
+## w= day of the week
+## d= day of the month
+## m= month specified in number or letters
+## a=1/2/3/4 week of the month
+##   ex) w=sat & a=3 is 3rd saturday of the month
+## b= same as above but counting from last
+##
+###############
+
+m4_include(/home/hahi/.config/when/general)
+m4_include(/home/hahi/.config/when/personal)
