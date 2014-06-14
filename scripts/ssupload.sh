@@ -13,7 +13,7 @@ sleep 1 # required to fix scrot -s issue that breaks keybinds
 file="$(scrot -s "${screenshot_dir}${filename_format}${file_extension}" -e 'echo -n $f')"
 
 if [[ $image_host == "pomf.se" ]]; then
-    base="$(curl -sf -F files[]=@"$file" http://pomf.se/upload.php | grep -Eo "\"url\":\"[A-Za-z0-9]+${file_extension}\"," | sed 's/"url":"//;s/",//')"
+    base="$(curl -sf -F files[]=@"$file" http://pomf.se/upload.php | grep -Eo "\"url\":\"[0-9]\\\/[A-Za-z0-9]+${file_extension}\"," | sed 's/"url":"//;s/",//;s/\\//')"
 
     url="http://a.pomf.se/$base"
 fi
