@@ -2,7 +2,7 @@
 
 # visuals
 bspc config border_width        2
-bspc config window_gap          12
+bspc config window_gap          8
 bspc config split_ratio         0.52
 bspc config borderless_monocle  true
 bspc config gapless_monocle     true
@@ -18,6 +18,5 @@ bspc monitor DVI-D-0 -d I II III IV V
 bspc monitor DVI-I-0 -d VI VII VIII IX X
 
 # application rules
-bspc rule -a Gimp desktop=^8 follow=on floating=on
 bspc rule -a Firefox desktop=^4
 bspc rule -a qemu-system-i386 floating=on
