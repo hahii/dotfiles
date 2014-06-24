@@ -6,6 +6,7 @@ highlight BufTab:hover color: #2e3330; border-bottom-left-radius: 2px; border-bo
 highlight BufTabAlternate:hover color: #2e3330; border-bottom-left-radius: 2px; border-bottom-right-radius: 2px;
 highlight BufTabs color: inherit; margin: 0 !important; padding: 0 !important; overflow: hidden; font-weight: normal;
 highlight BufTabSelected background-repeat: no-repeat; background-size: contain, contain; background-position: 2px top; color: #000; margin: 0 !important; font-weight: bold; border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; max-width: 130px;
+highlight Hint font: bold 12px "DejaVu Sans Mono", monospace !important; margin: -.2ex; padding: 0 2px 0 2px; outline: 1px solid rgba(0, 0, 0, .5); background: rgba(255, 248, 231, .8); color: black; text-transform: uppercase;
 highlight StatusLineNormal color:black;background-color:white
 map -count -modes=n,v a <count>H
 map -count -modes=n,v c <count><C-d>
@@ -23,6 +24,7 @@ map -count -modes=n,v X <count>:tabmove<Space>$<Return>
 set buftabs-elem=ti
 set editor=''
 set guioptions=bCs
+set hintkeys=1234qwerasdf
 set showstatuslinks=command
 set showtabline=never
 set yankshort=
