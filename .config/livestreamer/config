@@ -1,1 +1,2 @@
 player=mpv --cache=2048
+no-version-check
