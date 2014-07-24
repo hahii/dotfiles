@@ -29,8 +29,8 @@ super + bracket{left,right}
 	bspc desktop --focus {prev,next}
 
 # change to specified desktop, shift to move window to specified desktop (hack to fix for my monitor order)
-super + {_,shift + }{1-4,5,6-9,0}
-	bspc {desktop --focus,window --to-desktop} ^{6-9,10,1-4,5}
+super + {_,shift + }{1-5,6}
+	bspc {desktop --focus,window --to-desktop} ^{2-6,1}
 
 
 

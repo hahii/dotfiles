@@ -15,8 +15,8 @@ bspc config presel_border_color "#3399FF"
 bspc monitor DVI-D-0 -d I II III IV V
 
 #Right Monitor
-bspc monitor DVI-I-0 -d VI VII VIII IX X
+bspc monitor DVI-I-0 -d VI
 
 # application rules
-bspc rule -a Firefox desktop=^4
+bspc rule -a Firefox desktop=^1
 bspc rule -a qemu-system-i386 floating=on
