@@ -15,7 +15,7 @@ super + t
 	bspc desktop --layout next
 
 super + {x,f}
-	bspc window --toggle {floating,fullscreen}
+	bspc window --toggle {floating,private}
 
 
 
