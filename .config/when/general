@@ -66,8 +66,8 @@ m=5 & w=mon & b=2 , Victoria Day
 m=6 & w=sun & a=3 , Father's Day
 * jul 1 , Canada Day
 m=8 & w=mon & a=1 , August Civic Holiday
-m=9 & w=mon & a=2 , Thanksgiving (Canada)
 m=9 & w=mon & a=1 , Labour Day
+m=10 & w=mon & a=2 , Thanksgiving (Canada)
 * nov 11 , Remembrance Day
 * dec 26 , Boxing Day
 
