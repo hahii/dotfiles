@@ -15,7 +15,6 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 
-export MPV_HOME="$XDG_CONFIG_HOME/mpv"
 export GIMP2_DIRECTORY="$XDG_CONFIG_HOME/gimp"
 export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 
