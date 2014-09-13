@@ -42,6 +42,7 @@ alias mcabber='mcabber -f ~/.config/mcabber/mcabberrc'
 
 # script aliases
 
+alias checkupdates='/home/hahi/scripts/updatecheck.sh'
 alias wpstart='/home/hahi/scripts/wallpaper-random.sh &'
 alias wpstop='/home/hahi/scripts/wallpaper-stop.sh'
 alias winxpstart='qemu-system-i386 -enable-kvm -net none -soundhw es1370 -m 1024 -vga std -usbdevice tablet /mnt/storagetoshiba/software/image/WinXP/winxp.raw.overlay.1'
