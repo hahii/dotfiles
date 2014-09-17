@@ -13,9 +13,6 @@ export QT_IM_MODULE='uim'
 uim-xim &
 export XMODIFIERS='@im=uim'
 
-#Japanese input toolbar
-#uim-toolbar-gtk &
-
 #Disable Display Power Management Signaling and Xscreensaver
 xset -dpms
 xset s off
@@ -28,19 +25,6 @@ xsetroot -cursor_name left_ptr &
 
 # MPD daemon start (if no other user instance exists)
 [ ! -s ~/.config/mpd/pid ] && mpd
-
-#dwm status bar
-
-#while true
-#do
-#    xsetroot -name "$( date +"%F %R" )"
-#    sleep 1s #refresh status bar every second
-#done &
-
-#start window manager
-
-#start dwm
-#exec dwm
 
 #start bspwm
 sxhkd &
