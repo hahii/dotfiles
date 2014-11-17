@@ -1,3 +1,4 @@
 player=mpv --cache=2048
 no-version-check
+verbose-player
 default-stream=best
