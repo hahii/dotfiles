@@ -1,3 +1,6 @@
+# add to completions path
+fpath+=( ~/scripts/zsh )
+
 # enable tab completion system
 autoload -U compinit && compinit
 
