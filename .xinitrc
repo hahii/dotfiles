@@ -20,6 +20,9 @@ xset s off
 #typematic (keyboard repeat/delay) settings, ms delay, Hz speed
 xset r rate 250 25
 
+#caps lock key mirrors left ctrl
+setxkbmap -option ctrl:nocaps
+
 #this is required to fix cursor for bspwm, not sure why it isn't needed with dwm
 xsetroot -cursor_name left_ptr &
 
