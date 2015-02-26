@@ -9,6 +9,7 @@ set viminfo+=<1000	" copy up to 1000 lines (default 50)
 set autoindent		" auto indent on newline if starting from indent
 set wrap		" enable line wrap
 set linebreak		" wrap lines at end of word rather than mid
+set ttimeoutlen=0	" allows exiting insert mode instantly and removes lag on O, may cause issues with key combinations
 set spelllang=en_ca,cjk " Canadian spellcheck, ignore east asian
 set mouse=a		" enable mouse in all modes
 
@@ -29,6 +30,10 @@ syntax on		" syntax highlighting
 highlight LineNr ctermfg=250		" inactive line number colour
 highlight CursorLineNr ctermfg=245	" active line number colour
 highlight CursorLine cterm=NONE ctermbg=254	" current line highlight colour
+
+" different line/number colour when in insert mode
+au InsertEnter * hi CursorLine cterm=none ctermbg=153 | hi CursorLineNr ctermfg=75
+au InsertLeave * hi CursorLine cterm=none ctermbg=254 | hi CursorLineNr ctermfg=245
 
 
 " change .vim, swap, backup, viminfo directories
