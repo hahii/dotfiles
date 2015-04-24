@@ -69,6 +69,7 @@ ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=white,bold'
 # Exporting some variables to make some stuff use .config
 
 export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 
@@ -92,11 +93,12 @@ alias anki='anki -b ~/.config/anki'
 alias ncmpcpp='ncmpcpp -c ~/.config/ncmpcpp/config'
 alias vim='vim -u ~/.config/vim/vimrc'
 alias weechat='weechat -d ~/.config/weechat'
+alias tmsu='tmsu --database=$XDG_DATA_HOME/tmsu/wallpaperdb'
 
 
 # script aliases
 
+wp() {pkill -f wallpaper-random.sh; /home/hahi/scripts/wallpaper-random.sh "$@" &!}
 alias checkupdates='/home/hahi/scripts/updatecheck.sh'
-alias wpstart='/home/hahi/scripts/wallpaper-random.sh &!'
 alias wpstop='/home/hahi/scripts/wallpaper-stop.sh'
 alias winxpstart='qemu-system-i386 -enable-kvm -net none -soundhw es1370 -m 1024 -vga std -usbdevice tablet /mnt/storagetoshiba/software/image/WinXP/winxp.raw.overlay.1'
