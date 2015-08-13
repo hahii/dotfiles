@@ -8,19 +8,21 @@ highlight BufTabs color: inherit; margin: 0 !important; padding: 0 !important; o
 highlight BufTabSelected background-repeat: no-repeat; background-size: contain, contain; background-position: 2px top; color: #000; margin: 0 !important; font-weight: bold; border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; max-width: 130px;
 highlight Hint font: bold 12px "DejaVu Sans Mono", monospace !important; margin: -.2ex; padding: 0 2px 0 2px; outline: 1px solid rgba(0, 0, 0, .5); background: rgba(255, 248, 231, .8); color: black; text-transform: uppercase;
 highlight StatusLineNormal color:black;background-color:white
-map -count -modes=n,v a <count>H
-map -count -modes=n,v c <count><C-d>
-map -count -modes=n,v e <count>gt
-map -count -modes=n,v E <count>:tabmove<Space>+1<Return>
-map -count -modes=n,v M <Nop>
-map -count -modes=n,v p -builtin <count>P
-map -count -modes=n,v P -builtin <count>p
-map -count -modes=n,v q <count>gT
-map -count -modes=n,v Q <count>:tabmove<Space>-1<Return>
-map -count -modes=n,v s <count>L
-map -count -modes=n,v v <count><C-u>
-map -count -modes=n,v x <count>g$
-map -count -modes=n,v X <count>:tabmove<Space>$<Return>
+map -count M <Nop>
+map -count m <Nop>
+map p -builtin P
+map P -builtin p
+map -count e <count>gt
+map -count q <count>gT
+map -ex E :tabmove +1
+map -ex Q :tabmove -1
+map -count a <count>H
+map -count s <count>L
+map c <C-d>
+map v <C-u>
+map -ex x :tablast
+map -ex X :tabmove $
+map -ex C :set guioptions!=T
 set buftabs-elem=ti
 set editor=''
 set guioptions=bCs
