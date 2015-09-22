@@ -1,5 +1,5 @@
 #set monitor positions
-xrandr --output DVI-D-0 --auto --output DVI-I-0 --auto --right-of DVI-D-0
+xrandr --output HDMI-0 --auto --output DVI-I-1 --auto --right-of HDMI-0
 
 #read Xresources file, first part makes sure file exists first
 [[ -f ~/.Xresources ]] && xrdb -merge ~/.Xresources
@@ -13,8 +13,10 @@ export QT_IM_MODULE='uim'
 uim-xim &
 export XMODIFIERS='@im=uim'
 
-#Disable Display Power Management Signaling and Xscreensaver
-xset -dpms
+#Time in seconds until monitor standby (just screen, not much energy save), suspend (screen+psu), poweroff (entirely off)
+xset dpms 0 900 0
+
+#Disable Xscreensaver
 xset s off
 
 #typematic (keyboard repeat/delay) settings, ms delay, Hz speed

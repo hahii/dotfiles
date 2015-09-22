@@ -12,10 +12,10 @@ bspc config urgent_border_color "#FF3333"
 bspc config presel_border_color "#3399FF"
 
 #Left Monitor
-bspc monitor DVI-D-0 -d I II III IV V
+bspc monitor HDMI-0 -d M1A M1B M1C M1D M1E
 
 #Right Monitor
-bspc monitor DVI-I-0 -d VI
+bspc monitor DVI-I-1 -d M2A
 
 # application rules
 bspc rule -a Firefox desktop=^1
