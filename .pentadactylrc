@@ -2,12 +2,17 @@
 
 loadplugins '\.(js|penta)$'
 group user
-highlight BufTab:hover color: #2e3330; border-bottom-left-radius: 2px; border-bottom-right-radius: 2px;
-highlight BufTabAlternate:hover color: #2e3330; border-bottom-left-radius: 2px; border-bottom-right-radius: 2px;
-highlight BufTabs color: inherit; margin: 0 !important; padding: 0 !important; overflow: hidden; font-weight: normal;
-highlight BufTabSelected background-repeat: no-repeat; background-size: contain, contain; background-position: 2px top; color: #000; margin: 0 !important; font-weight: bold; border-bottom-left-radius: 2px; border-bottom-right-radius: 2px; max-width: 130px;
+highlight BufTabs overflow: hidden; font-weight: normal;
+highlight BufTabSelected background-repeat: no-repeat; background-size: contain, contain; color: #FFFFFF; margin: 0 !important; font-weight: bold; max-width: 130px;
+highlight BufTab:hover color: #FFFFFF;
+highlight BufTabAlternate:hover color: #FFFFFF;
+highlight Normal /* expanded message area and user input line */ color: #CCCCCC; background: #181818; font-size: 14px;
+highlight StatusLineNormal color: #CCCCCC; background: #181818; font-size: 14px;
+highlight StatusLineBroken color: #FFA0A0; background: #181818; font-size: 14px;
+highlight StatusLineSecure color: #A0A0FF; background: #181818; font-size: 14px;
+highlight StatusLineExtended color: #A0FFA0; background: #181818; font-size: 14px;
+highlight CompTitle /* completion window headers */ color: #FFFFFF;
 highlight Hint font: bold 12px "DejaVu Sans Mono", monospace !important; margin: -.2ex; padding: 0 2px 0 2px; outline: 1px solid rgba(0, 0, 0, .5); background: rgba(255, 248, 231, .8); color: black; text-transform: uppercase;
-highlight StatusLineNormal color:black;background-color:white
 map -count M <Nop>
 map -count m <Nop>
 map p -builtin P
