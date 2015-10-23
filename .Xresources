@@ -1,12 +1,13 @@
 Xcursor.theme: Vanilla-DMZ
+Xcursor.size: 25
 
 URxvt*.scrollBar: false
-URxvt*.font: xft:envy code r:size=11
+URxvt*.font: xft:envy code r:size=9
 
 ! non-composited transparency
 URxvt*.transparent: true
 ! transparency darken 0-99 or lighten 101-200
-URxvt*.shading: 185 
+URxvt*.shading: 50 
 
 ! urxvt-pearls plugin
 URxvt*.perl-ext-common:      default,clipboard,url-select,keyboard-select
@@ -19,8 +20,8 @@ URxvt*.keysym.M-c:           perl:clipboard:copy
 URxvt*.keysym.M-v:           perl:clipboard:paste
 URxvt*.keysym.M-C-v:         perl:clipboard:paste_escaped
 
-URxvt*.background: #F8F8F8
-URxvt*.foreground: #282828
+URxvt*.foreground: #F8F8F8
+URxvt*.background: #282828
 URxvt*.colorUL: #FF99CC
 
 URxvt*.color0: #464444
