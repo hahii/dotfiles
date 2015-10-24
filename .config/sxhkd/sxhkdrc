@@ -43,8 +43,15 @@ super + {_,shift + }{1-6}
 super + {_,shift + }c
 	bspc window --focus {next,prev}
 
-super + {grave,Tab}
-	bspc {window,desktop} --focus last
+super + grave
+	bspc window --focus last
+
+super + Tab
+	if bspc control --get-status | grep MHDMI-0 &> /dev/null ; then \
+		bspc desktop --focus last.local; \
+	else \
+		bspc monitor --focus HDMI-0; \
+	fi
 
 super + apostrophe
 	bspc window --swap last
