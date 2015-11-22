@@ -2,14 +2,9 @@ color listfocus default cyan
 color info default cyan
 browser firefox
 
-
-#ignore entries containing "The" in the title, as "TheUnarchiver" is the GUI mac ver, and we are looking for unar
-
-ignore-article "https://code.google.com/feeds/p/theunarchiver/downloads/basic" "title # \"The\""
-
-# vim navigation
-
 bind-key j down
 bind-key k up
 bind-key h left
 bind-key l right
+
+include "~/.config/newsbeuter/killfile"
