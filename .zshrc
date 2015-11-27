@@ -101,4 +101,4 @@ alias tmsu='tmsu --database=$XDG_DATA_HOME/tmsu/wallpaperdb'
 wp() {pkill -f wallpaper-random.sh; /home/hahi/scripts/wallpaper-random.sh "$@" &!}
 alias checkupdates='/home/hahi/scripts/updatecheck.sh'
 alias wpstop='/home/hahi/scripts/wallpaper-stop.sh'
-alias winxpstart='qemu-system-i386 -enable-kvm -net none -soundhw es1370 -m 1024 -vga std -usbdevice tablet /mnt/storagetoshiba/software/image/WinXP/winxp.raw.overlay.1'
+alias winxpstart='QEMU_AUDIO_DRV=alsa qemu-system-i386 -enable-kvm -cpu host -net none -soundhw es1370 -m 1024 -vga std -usbdevice tablet /mnt/storagetoshiba/software/image/WinXP/winxp.raw.overlay.1'
