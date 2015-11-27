@@ -21,8 +21,8 @@ color1 = default
 color2 = default
 
 
-song_list_format = {%A $8[$9%a$8]$9}|{%a} {$8//$9 %20b}{ $8($9%y$8)$9} $8//$9 {$8{%d-}%n - $9}{$7%t$9}|{$8%f$9}$R{$8%l$9}
+song_list_format = {%A $8[$9%a$8]$9}|{%a} {$8//$9 %20b}{ $8($9%y$8)$9} $8//$9 {$8{%d-}%n - $9}{$5%t$9}|{$8%f$9}$R{$8%l$9}
 
 song_columns_list_format = (3f)[]{nE} (50)[]{t|f:Title} (30)[white]{br} (10)[white]{yrE} (7f)[]{lr}
 
-song_status_format = {{%a{「%b」} }{$7%t$9}}|{%f}
+song_status_format = {{%a{「%b」} }{$5%t$9}}|{%f}

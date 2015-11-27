@@ -1,5 +1,5 @@
-color listfocus default cyan
-color info default cyan
+color listfocus white black
+color info default default
 browser firefox
 
 bind-key j down

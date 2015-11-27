@@ -2,12 +2,16 @@ Xcursor.theme: Vanilla-DMZ
 Xcursor.size: 25
 
 URxvt*.scrollBar: false
-URxvt*.font: xft:envy code r:size=9
+URxvt*.font: xft:envy code r:size=9, xft:otf-ipafont:size=9
 
 ! non-composited transparency
-URxvt*.transparent: true
+! URxvt*.transparent: true
 ! transparency darken 0-99 or lighten 101-200
-URxvt*.shading: 50 
+! URxvt*.shading: 50 
+
+! composited transparency
+URxvt*.depth: 32
+URxvt*.background: [50]#000000
 
 ! urxvt-pearls plugin
 URxvt*.perl-ext-common:      default,clipboard,url-select,keyboard-select
@@ -19,25 +23,27 @@ URxvt*.keysym.M-s:           perl:keyboard-select:search
 URxvt*.keysym.M-c:           perl:clipboard:copy
 URxvt*.keysym.M-v:           perl:clipboard:paste
 URxvt*.keysym.M-C-v:         perl:clipboard:paste_escaped
+URxvt*.keysym.M-i:           command:\033]11;[50]#000000\007
+URxvt*.keysym.M-o:           command:\033]11;#151515\007
 
 URxvt*.foreground: #F8F8F8
-URxvt*.background: #282828
+! URxvt*.background: #282828
 URxvt*.colorUL: #FF99CC
 
-URxvt*.color0: #464444
-URxvt*.color1: #EF3460
-URxvt*.color2: #00FF00
-URxvt*.color3: #EFC334
-URxvt*.color4: #34BDEF
-URxvt*.color5: #B300FF
-URxvt*.color6: #3DD8FF
-URxvt*.color7: #B8B8B8
+URxvt*.color0: #2A0150
+URxvt*.color1: #FF2457
+URxvt*.color2: #4BFF4B
+URxvt*.color3: #FFE000
+URxvt*.color4: #3DD8FF
+URxvt*.color5: #EF2AFF
+URxvt*.color6: #64FFC1
+URxvt*.color7: #F8F8F8
 
-URxvt*.color8: #8a8888
-URxvt*.color9: #F25A7D
-URxvt*.color10: #99CC00
-URxvt*.color11: #FF6600
-URxvt*.color12: #92AAF6
+URxvt*.color8: #B6ADBC
+URxvt*.color9: #FF4D76
+URxvt*.color10: #7BFF00
+URxvt*.color11: #FFFB67
+URxvt*.color12: #79A8FF
 URxvt*.color13: #DF92F6
-URxvt*.color14: #5AF2CE
-URxvt*.color15: #787878
+URxvt*.color14: #8CFDC5
+URxvt*.color15: #F8F8F8
