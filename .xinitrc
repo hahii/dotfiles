@@ -28,6 +28,9 @@ setxkbmap -option ctrl:nocaps
 #this is required to fix cursor for bspwm, not sure why it isn't needed with dwm
 xsetroot -cursor_name left_ptr &
 
+#compositing for vsync, paint-on-overlay and glx-no-stencil improve performance, xrender-syncs fix issues
+compton --backend glx --vsync opengl-swc --paint-on-overlay --glx-no-stencil --xrender-sync --xrender-sync-fence -b
+
 # MPD daemon start (if no other user instance exists)
 [ ! -s ~/.config/mpd/pid ] && mpd
 
