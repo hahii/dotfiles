@@ -17,7 +17,7 @@ if [[ $image_host == "pomf.se" ]]; then
 
     url="http://a.pomf.se/$base"
 elif [[ $image_host == "uguu.se" ]]; then
-    base="$(curl -sf -F randomname=xxxxxx -F file=@"$file" http://uguu.se/api.php?d=upload-tool)"
+    base="$(curl -sf -F randomname=xxxxxx -F file=@"$file" https://uguu.se/api.php?d=upload-tool)"
 
     url="$base"
 fi
