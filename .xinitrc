@@ -14,7 +14,7 @@ uim-xim &
 export XMODIFIERS='@im=uim'
 
 #Time in seconds until monitor standby (just screen, not much energy save), suspend (screen+psu), poweroff (entirely off)
-xset dpms 0 900 0
+xset dpms 0 1200 0
 
 #Disable Xscreensaver
 xset s off
