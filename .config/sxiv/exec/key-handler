@@ -1,0 +1,9 @@
+#!/bin/sh
+
+# Called by sxiv(1) after the external prefix key (C-x by default) is pressed.
+# The next key combo is its first argument.
+# All marked images or the current image is its next argument(s).
+
+case $1 in
+	"C-c") echo -n "$2" | xclip ;;
+esac
