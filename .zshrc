@@ -35,6 +35,9 @@ bindkey "${terminfo[kcuu1]}" up-line-or-search
 bindkey "${terminfo[kcud1]}" down-line-or-search
 
 
+# delete from cursor to start of line (default in bash), instead of delete entire line (default in zsh)
+bindkey '^U' backward-kill-line
+
 
 # improved kill completion to show user processes only
 zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
