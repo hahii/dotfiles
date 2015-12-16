@@ -1,5 +1,7 @@
 #!/bin/bash
 #
+# idk what im doing
+#
 #   To the extent possible under law, the author(s) have
 #   dedicated all copyright and related and neighboring
 #   rights to this software to the public domain worldwide.
@@ -26,15 +28,21 @@
 set -e
 
 SLEEPTIME='5m'
-MONITORS=1
+MONITORS=2
 SHOWINFO=1
-TAGDB="--database=$XDG_DATA_HOME/tmsu/wallpaperdb"
+TAGDB="$XDG_DATA_HOME/tmsu/wallpaperdb"
 
-# default tags for each monitor can be set here
+# default tags for each monitor can be set here, will be overridden by command line tag arguments
 MONTAG0=""
 MONTAG1=""
 MONTAG2=""
 MONTAG3=""
+
+# tags that will NOT be changed by command line tag arguments 
+PMONTAG0="(3840 or 2560)"
+PMONTAG1="(3840 or 2560)"
+PMONTAG2=""
+PMONTAG3=""
 
 
 
@@ -113,7 +121,11 @@ trap 'rm -rf "${TMPINFODIR}"' EXIT
 COUNTER=0
 while [ $COUNTER -lt $MONITORS ]; do
 	MONTAGC=MONTAG${COUNTER}
-	TAGFILELIST="$( tmsu ${TAGDB} files ${!MONTAGC} )"
+	PMONTAGC=PMONTAG${COUNTER}
+	if [[ $MONTAG0 ]] && [[ ! "${!MONTAGC}" ]]; then
+		MONTAGC=MONTAG0
+	fi
+	TAGFILELIST="$( tmsu --database=${TAGDB} files "${!PMONTAGC} ${!MONTAGC}" )"
 	let COUNTER=COUNTER+1
 done
 
@@ -136,7 +148,11 @@ while [  $SHOWINFO -eq 1 ] && [ $COUNTER -lt $MONITORS ]; do
 	fi
 
 	MONTAGC=MONTAG${COUNTER}
-	echo -n "$(tmsu ${TAGDB} files ${!MONTAGC} | wc -l) wallpapers tagged ${!MONTAGC}"
+	PMONTAGC=PMONTAG${COUNTER}
+	if [[ $MONTAG0 ]] && [[ ! "${!MONTAGC}" ]]; then
+		MONTAGC=MONTAG0
+	fi
+	echo -n "$(tmsu --database=${TAGDB} files "${!PMONTAGC} ${!MONTAGC}" | wc -l) wallpapers tagged ${!MONTAGC}"
 	
 	if [[ $MONITORS -gt 1 ]]; then
 		echo -n " on monitor $COUNTER"
@@ -158,7 +174,13 @@ while true; do
 	while [ $COUNTER -lt $MONITORS ]; do
 		# to nest variables in bash you have to do it like this in a new variable and then reference it using an exclamation point
 		MONTAGC=MONTAG${COUNTER}
-		nitrogen --head=$COUNTER --set-zoom-fill "$(tmsu ${TAGDB} files ${!MONTAGC} | shuf -n1 | tee "${TMPINFODIR}/current_wallpaper" )"
+		PMONTAGC=PMONTAG${COUNTER}
+		# for multiple monitors, montag above 0 will be empty if tags aren't specified for each monitor individually. If montag0 is not empty and the current monitor is, we can assume we want those tags used for the current monitor (useful when you don't want to specify the same tags for every monitor 1 by 1)
+		# if you DO want a secondary monitor to not have any tags (meaning all wallpapers will be shown) despite the first monitor having tags, specify a space " " using -m and that montag will not be seen as empty by this check, but tmsu will still see it as no tags and list all files
+		if [[ $MONTAG0 ]] && [[ ! "${!MONTAGC}" ]]; then
+			MONTAGC=MONTAG0
+		fi
+		nitrogen --head=$COUNTER --set-zoom-fill "$(tmsu --database=${TAGDB} files "${!PMONTAGC} ${!MONTAGC}" | shuf -n1 | tee -a "${TMPINFODIR}/current_wallpaper" )"
 		# note we tee the output of ls to a file in the /tmp directory so the currently used wallpaper can be checked externally
 		let COUNTER=COUNTER+1
 	done
