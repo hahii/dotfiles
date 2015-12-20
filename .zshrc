@@ -18,8 +18,12 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:
 autoload -U colors && colors
 PROMPT="%n@%{$fg_no_bold[blue]%}%M%{$reset_color%} %1~ $ "
 
+# set XDG base directories
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
 
-# Do not add duplicates or commands beginning with a space to history
+# do not add duplicates or commands beginning with a space to history
 setopt hist_ignore_dups
 setopt hist_ignore_space
 
@@ -71,11 +75,6 @@ ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=white,bold'
 
 # Exporting some variables to make some stuff use .config
 
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_CACHE_HOME="$HOME/.cache"
-
-
 export GIMP2_DIRECTORY="$XDG_CONFIG_HOME/gimp"
 export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 
@@ -84,7 +83,8 @@ export LESSHISTFILE="$XDG_CACHE_HOME/lesshst"
 
 ## aliases ##
 
-alias ls='ls --color=auto'
+alias ls='LC_COLLATE="en_US.UTF-8" ls --human-readable --almost-all --color=auto --group-directories-first'
+eval "$(dircolors $XDG_CONFIG_HOME/dircolors)"
 
 alias stor1='cd /mnt/storagetoshiba/'
 alias stor2='cd /mnt/storageseagate/'
