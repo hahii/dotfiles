@@ -1,6 +1,15 @@
 # add to completions path
 fpath=(~/scripts/zsh $fpath)
 
+# set XDG base directories
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+# set LS_COLORS
+eval "$(dircolors $XDG_CONFIG_HOME/dircolors)"
+
+
 # enable tab completion system
 autoload -U compinit && compinit
 
@@ -13,15 +22,17 @@ bindkey "${terminfo[kcbt]}" reverse-menu-complete
 # tab completion is case insensitive and can start from middle of filename
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
+# tab completion uses same colours as LS_COLORS
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+# tab completion show dot files without specifying the dot
+setopt globdots
+
 
 # enable prompt colours and set prompt
 autoload -U colors && colors
 PROMPT="%n@%{$fg_no_bold[blue]%}%M%{$reset_color%} %1~ $ "
 
-# set XDG base directories
-export XDG_CONFIG_HOME="$HOME/.config"
-export XDG_DATA_HOME="$HOME/.local/share"
-export XDG_CACHE_HOME="$HOME/.cache"
 
 # do not add duplicates or commands beginning with a space to history
 setopt hist_ignore_dups
@@ -84,10 +95,11 @@ export LESSHISTFILE="$XDG_CACHE_HOME/lesshst"
 ## aliases ##
 
 alias ls='LC_COLLATE="en_US.UTF-8" ls --human-readable --almost-all --color=auto --group-directories-first'
-eval "$(dircolors $XDG_CONFIG_HOME/dircolors)"
+
+alias l='less'
 
 alias stor1='cd /mnt/storagetoshiba/'
-alias stor2='cd /mnt/storageseagate/'
+alias stor2='cd /mnt/storagewd/backup/'
 
 
 # aliases to use .config directory for config files
