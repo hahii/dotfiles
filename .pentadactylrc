@@ -14,7 +14,6 @@ highlight StatusLineExtended color: #A0FFA0; background: #181818; font-size: 14p
 highlight CompTitle /* completion window headers */ color: #FFFFFF;
 highlight Hint font: bold 12px "DejaVu Sans Mono", monospace !important; margin: -.2ex; padding: 0 2px 0 2px; outline: 1px solid rgba(0, 0, 0, .5); background: rgba(255, 248, 231, .8); color: black; text-transform: uppercase;
 map -count M <Nop>
-map -count m <Nop>
 map p -builtin P
 map P -builtin p
 map -count e <count>gt
@@ -28,6 +27,8 @@ map v <C-u>
 map -ex x :tablast
 map -ex X :tabmove $
 map -ex C :set guioptions!=T
+map -ex , :tabdetach
+map -ex m :tabattach 1
 set buftabs-elem=ti
 set editor=''
 set guioptions=bCs
