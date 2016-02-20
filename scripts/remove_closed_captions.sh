@@ -9,6 +9,8 @@
 #	→ ➡			(sentence continues on next subtitle line)
 # It then removes anything enclosed in （） () []
 
+# WARNING: this script overwrites the original files, so you must create backups manually beforehand
+
 # WARNING: do not use more than once on the same files, or necessary blank lines will be removed
 
 # NOTE: if you simply used (.*) to remove the contents of parentheses (same for [.*]), it does a "greedy" match
