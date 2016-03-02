@@ -84,10 +84,14 @@ ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=white,bold'
 
 
 
+# prevent ctrl-s from freezing terminal
+stty -ixon
+
 # Exporting some variables to make some stuff use .config
 
 export GIMP2_DIRECTORY="$XDG_CONFIG_HOME/gimp"
 export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
+export MEDNAFEN_HOME="$XDG_CONFIG_HOME"/mednafen
 
 export LESSHISTFILE="$XDG_CACHE_HOME/lesshst"
 
@@ -97,6 +101,8 @@ export LESSHISTFILE="$XDG_CACHE_HOME/lesshst"
 alias ls='LC_COLLATE="en_US.UTF-8" ls --human-readable --almost-all --color=auto --group-directories-first'
 
 alias l='less'
+
+alias bc='bc -q'
 
 alias stor1='cd /mnt/storagetoshiba/'
 alias stor2='cd /mnt/storagewd/backup/'
@@ -109,6 +115,7 @@ alias ncmpcpp='ncmpcpp -c ~/.config/ncmpcpp/config'
 alias vim='vim -u ~/.config/vim/vimrc'
 alias weechat='weechat -d ~/.config/weechat'
 alias tmsu='tmsu --database=$XDG_DATA_HOME/tmsu/wallpaperdb'
+alias qmv='qmv -e "vim -u ~/.config/vim/vimrc" -f do'
 
 
 # script aliases
