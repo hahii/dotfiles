@@ -1,11 +1,16 @@
 set nocompatible	" Vi incompatible settings (must be first as it affects other options)
 
+" change .vim, swap, backup, viminfo directories
+set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
+set directory=~/.local/share/vim/swap//,/tmp
+set backupdir=~/.local/share/vim/backup,/tmp
+set viminfo+=<1000				" copy up to 1000 lines (default 50)
+set viminfo+=n~/.local/share/vim/viminfo	" old sessions will use and recreate old location, this MUST BE THE LAST SET VIMINFO
 
-set backup		" keep a backup file
+
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set hidden		" allow multiple files by hiding instead of closing
 set history=50		" keep 50 lines of command line history
-set viminfo+=<1000	" copy up to 1000 lines (default 50)
 set autoindent		" auto indent on newline if starting from indent
 set wrap		" enable line wrap
 set linebreak		" wrap lines at end of word rather than mid
@@ -18,39 +23,80 @@ set incsearch		" show matches while typing search pattern
 set ignorecase		" case insensitive searching
 set smartcase		" disable ignorecase when inputting uppercase
 
-set ruler		" always show cursor position
-set showcmd		" display incomplete commands in bottom right
 set scrolloff=5		" minimum visible lines above and below cursor
 set number		" number lines
 set cursorline		" highlight current line
 set nolist		" do not display EOL or TAB markers
 set shortmess+=I	" disable intro message when opening vim
 
+
+set showcmd		" display incomplete commands in bottom right
+set laststatus=2	" always show statusline
+set statusline=%<%F\ (%LL)\ %#WarningMsg#%M%#ErrorMsg#%R%##%=%y[%{&ff}][%{&fenc}]\ %4P
+
+
 syntax on		" syntax highlighting
-highlight LineNr ctermfg=250		" inactive line number colour
-highlight CursorLineNr ctermfg=245	" active line number colour
-highlight CursorLine cterm=NONE ctermbg=254	" current line highlight colour
+colorscheme custom_dark
 
-" different line/number colour when in insert mode
-au InsertEnter * hi CursorLine cterm=none ctermbg=153 | hi CursorLineNr ctermfg=75
-au InsertLeave * hi CursorLine cterm=none ctermbg=254 | hi CursorLineNr ctermfg=245
-
-
-" change .vim, swap, backup, viminfo directories
-set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
-set directory=~/.local/share/vim/swap//,/tmp
-set backupdir=~/.local/share/vim/backup,/tmp
-set viminfo+=n~/.local/share/vim/viminfo	" old sessions will use and recreate old location
 
 " set backup files to contain timestamp in format _YYYYMMDD-HHMM
+" NOTE this will only set the timestamp once when opening vim, meaning only one backup file (continuously overwritten) will be kept until vim is reopened
+set backup		" keep a backup file
 let backupextvar = strftime("%Y%m%d-%H%M")
 let backupextvar = "set backupext=_". backupextvar
 execute backupextvar
 
 
+" set leader key to something else so we can use backslash without conflict
+let mapleader="Z"
+
+" toggle spellcheck
+map s :set spell! spell?<CR>
+
+" turn off current search highlighting
+map <silent> ` :nohlsearch<CR>
+
+" toggle nerdtree
+map <silent> <F2> :NERDTreeToggle<CR>
+
+" toggle buffergator
+map <silent> <F3> :BuffergatorToggle<CR>
+let g:buffergator_vsplit_size = 30
+
+" open CtrlP buffer list
+map <Space> :CtrlPBuffer<CR>
+
+" backspace and backslash go backwards and forwards in cursor location
+noremap <BS> <C-o>
+noremap <Bslash> <C-i>
+
+" tab switches between last used file (same as ctrl-6)
+noremap <Tab> <C-^>
+
+" move macro recording key
+noremap <Bar> q
+
+" change buffers
+map <silent> q :bnext<CR>
+map <silent> Q :bprev<CR>
+
+" faster substitute command
+map K :%s/
+
+" these do not mess up indentation like some methods of pasting
+" middle click style paste
+nmap <C-J> "*p
+imap <C-J> <C-O>"*p
+" ctrl+v style paste
+nmap <C-H> "+p
+imap <C-H> <C-O>"+p
 
 " ctrl-U in insert mode cannot be undone unless we break the undo with ctrl-g u
 inoremap <C-U> <C-G>u<C-U>
+
+
+" auto fix following words in insert mode (ctrl-v at the end of word to avoid auto fix)
+iabbrev teh the
 
 
 " always jump to the last known cursor position unless invalid or first line
@@ -67,6 +113,8 @@ if !exists(":DiffOrig")
 endif
 
 
+
+set sessionoptions=blank,buffers,folds,help,tabpages,winsize " prevent sessions from saving options and working directory
 
 " autoload the session when running vim
 au VimEnter * nested :call sessionpersist#LoadSession()
