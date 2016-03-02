@@ -7,7 +7,7 @@ highlight BufTabSelected background-repeat: no-repeat; background-size: contain,
 highlight BufTab:hover color: #FFFFFF;
 highlight BufTabAlternate:hover color: #FFFFFF;
 highlight Normal /* expanded message area and user input line */ color: #CCCCCC; background: #181818; font-size: 14px;
-highlight StatusLineNormal color: #CCCCCC; background: #181818; font-size: 14px;
+highlight StatusLineNormal color: #FFFFFF; background: #AB0000; font-size: 14px;
 highlight StatusLineBroken color: #FFA0A0; background: #181818; font-size: 14px;
 highlight StatusLineSecure color: #A0A0FF; background: #181818; font-size: 14px;
 highlight StatusLineExtended color: #A0FFA0; background: #181818; font-size: 14px;
