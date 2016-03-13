@@ -10,7 +10,7 @@ set viminfo+=n~/.local/share/vim/viminfo	" old sessions will use and recreate ol
 
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
 set hidden		" allow multiple files by hiding instead of closing
-set history=50		" keep 50 lines of command line history
+set history=1000	" lines of : history kept
 set autoindent		" auto indent on newline if starting from indent
 set wrap		" enable line wrap
 set linebreak		" wrap lines at end of word rather than mid
@@ -25,8 +25,8 @@ set smartcase		" disable ignorecase when inputting uppercase
 
 set scrolloff=5		" minimum visible lines above and below cursor
 set number		" number lines
+set relativenumber	" lines are numbered relative to current line, useful for calculating motions
 set cursorline		" highlight current line
-set nolist		" do not display EOL or TAB markers
 set shortmess+=I	" disable intro message when opening vim
 
 
@@ -50,6 +50,10 @@ execute backupextvar
 " set leader key to something else so we can use backslash without conflict
 let mapleader="Z"
 
+" make j and k go by visible line not actual line
+map j gj
+map k gk
+
 " toggle spellcheck
 map s :set spell! spell?<CR>
 
@@ -62,6 +66,23 @@ map <silent> <F2> :NERDTreeToggle<CR>
 " toggle buffergator
 map <silent> <F3> :BuffergatorToggle<CR>
 let g:buffergator_vsplit_size = 30
+
+" toggle colorcolumn
+map <F4> :call ColorColumnToggle()<CR>
+function! ColorColumnToggle()
+	if &colorcolumn
+		setlocal cc=0
+	else
+		setlocal cc=81
+	endif
+endfunction
+
+" show marks, show registers
+map <F5> :marks<CR>
+map <F6> :registers<CR>
+
+" toggle relative line numbering
+map <F7> :set relativenumber! relativenumber?<CR>
 
 " open CtrlP buffer list
 map <Space> :CtrlPBuffer<CR>
