@@ -1,7 +1,18 @@
-"1.1
-
 loadplugins '\.(js|penta)$'
+
 group user
+
+
+set buftabs-elem=ti
+set editor=''
+set guioptions=bCs
+set hintkeys=1234qwerasdf
+set showstatuslinks=command
+set showtabline=never
+set yankshort=
+
+
+
 highlight BufTabs overflow: hidden; font-weight: normal;
 highlight BufTabSelected background-repeat: no-repeat; background-size: contain, contain; color: #FFFFFF; margin: 0 !important; font-weight: bold; max-width: 130px;
 highlight BufTab:hover color: #FFFFFF;
@@ -13,28 +24,23 @@ highlight StatusLineSecure color: #A0A0FF; background: #181818; font-size: 14px;
 highlight StatusLineExtended color: #A0FFA0; background: #181818; font-size: 14px;
 highlight CompTitle /* completion window headers */ color: #FFFFFF;
 highlight Hint font: bold 12px "DejaVu Sans Mono", monospace !important; margin: -.2ex; padding: 0 2px 0 2px; outline: 1px solid rgba(0, 0, 0, .5); background: rgba(255, 248, 231, .8); color: black; text-transform: uppercase;
-map -count M <Nop>
-map p -builtin P
-map P -builtin p
-map -count e <count>gt
-map -count q <count>gT
-map -ex E :tabmove +1
-map -ex Q :tabmove -1
-map -count a <count>H
-map -count s <count>L
+
+
+
+map -builtin p P
+map -builtin P p
 map c <C-d>
 map v <C-u>
+map <Tab> <C-6>
+map -count e <count>gt
+map -count q <count>gT
+map -count a <count>H
+map -count s <count>L
+map -count M <Nop>
+map -ex E :tabmove +1
+map -ex Q :tabmove -1
 map -ex x :tablast
 map -ex X :tabmove $
 map -ex C :set guioptions!=T
 map -ex , :tabdetach
 map -ex m :tabattach 1
-set buftabs-elem=ti
-set editor=''
-set guioptions=bCs
-set hintkeys=1234qwerasdf
-set showstatuslinks=command
-set showtabline=never
-set yankshort=
-
-" vim: set ft=pentadactyl:
