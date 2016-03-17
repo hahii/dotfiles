@@ -1,6 +1,5 @@
 loadplugins '\.(js|penta)$'
 
-group user
 
 
 set buftabs-elem=ti
@@ -29,6 +28,7 @@ highlight Hint font: bold 12px "DejaVu Sans Mono", monospace !important; margin:
 
 map -builtin p P
 map -builtin P p
+map -builtin <Space> b
 map c <C-d>
 map v <C-u>
 map <Tab> <C-6>
@@ -36,7 +36,6 @@ map -count e <count>gt
 map -count q <count>gT
 map -count a <count>H
 map -count s <count>L
-map -count M <Nop>
 map -ex E :tabmove +1
 map -ex Q :tabmove -1
 map -ex x :tablast
@@ -44,3 +43,8 @@ map -ex X :tabmove $
 map -ex C :set guioptions!=T
 map -ex , :tabdetach
 map -ex m :tabattach 1
+
+
+map b <Nop>
+map i <Nop>
+map M <Nop>
