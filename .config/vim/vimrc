@@ -50,18 +50,17 @@ execute backupextvar
 " set leader key to something else so we can use backslash without conflict
 let mapleader="Z"
 
-" make j and k go by visible line not actual line
-map j gj
-map k gk
-
 " toggle spellcheck
 map s :set spell! spell?<CR>
 
 " turn off current search highlighting
 map <silent> ` :nohlsearch<CR>
 
-" toggle nerdtree
-map <silent> <F2> :NERDTreeToggle<CR>
+" browse current working directory
+map <silent> <F1> :e .<CR>
+
+" browse directory of current file
+map <silent> <F2> :e %:p:h<CR>
 
 " toggle buffergator
 map <silent> <F3> :BuffergatorToggle<CR>
@@ -94,12 +93,12 @@ noremap <Bslash> <C-i>
 " tab switches between last used file (same as ctrl-6)
 noremap <Tab> <C-^>
 
-" move macro recording key
-noremap <Bar> q
+" replace Q EX mode with indentation formatting
+noremap Q =
 
 " change buffers
-map <silent> q :bnext<CR>
-map <silent> Q :bprev<CR>
+map <silent> - :bprev<CR>
+map <silent> = :bnext<CR>
 
 " faster substitute command
 map K :%s/
