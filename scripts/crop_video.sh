@@ -33,4 +33,4 @@ if [ "$2" == "map" ]; then
 	done
 fi
 
-ffmpeg -ss "$STARTTIME" -i "$1" -vcodec copy -acodec copy -to "$DURATIONTIME" $TRACKSELECT "$OUTPUTFILENAME"
+ffmpeg -ss "$STARTTIME" -i "$1" -vcodec copy -acodec copy -sn -map_chapters -1 -to "$DURATIONTIME" $TRACKSELECT "$OUTPUTFILENAME"
