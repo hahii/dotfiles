@@ -81,8 +81,13 @@ while [[ "$#" > 0 ]]; do
 		# i guess nitrogen --set-color="#000000" can't be used alone? also need to suppot multi mon here.. figure something out for this feature later
 		exit 0
 		;;
+		stop)
+		echo "$(basename $0): Stopping and restoring default wallpapers."
+		nitrogen --restore
+		exit 0
+		;;
 		exit)
-		echo "$(basename $0): Exiting"
+		echo "$(basename $0): Exiting immediately."
 		exit 0
 		;;
 		-*)
