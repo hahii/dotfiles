@@ -62,9 +62,8 @@ map <silent> <F1> :e .<CR>
 " browse directory of current file
 map <silent> <F2> :e %:p:h<CR>
 
-" toggle buffergator
-map <silent> <F3> :BuffergatorToggle<CR>
-let g:buffergator_vsplit_size = 30
+" show buffer list using BufExplorer
+map <silent> <F3> :BufExplorer<CR>
 
 " toggle colorcolumn
 map <F4> :call ColorColumnToggle()<CR>
@@ -83,8 +82,15 @@ map <F6> :registers<CR>
 " toggle relative line numbering
 map <F7> :set relativenumber! relativenumber?<CR>
 
+" preview colour scheme
+map <F8> :so $VIMRUNTIME/syntax/hitest.vim<CR>
+
 " open CtrlP buffer list
 map <Space> :CtrlPBuffer<CR>
+" open CtrlP MRU list. for some reason NUL is ctrl-space
+map <NUL> :CtrlPMRU<CR>
+" unmap ctrl-space from insert mode as it does weird stuff
+imap <NUL> <Nop>
 
 " backspace and backslash go backwards and forwards in cursor location
 noremap <BS> <C-o>
