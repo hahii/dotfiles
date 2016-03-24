@@ -102,7 +102,7 @@ alias ls='LC_COLLATE="en_US.UTF-8" ls --human-readable --almost-all --color=auto
 
 alias l='less'
 
-alias bc='bc -q'
+alias bc='bc -ql'
 
 alias stor1='cd /mnt/storagetoshiba/'
 alias stor2='cd /mnt/storagewd/backup/'
@@ -113,6 +113,7 @@ alias stor2='cd /mnt/storagewd/backup/'
 alias anki='anki -b ~/.config/anki'
 alias ncmpcpp='ncmpcpp -c ~/.config/ncmpcpp/config'
 alias vim='vim -u ~/.config/vim/vimrc'
+alias vimdiff='vimdiff -u ~/.config/vim/vimrc'
 alias weechat='weechat -d ~/.config/weechat'
 alias tmsu='tmsu --database=$XDG_DATA_HOME/tmsu/wallpaperdb'
 alias qmv='qmv -e "vim -u ~/.config/vim/vimrc" -f do'
@@ -122,5 +123,3 @@ alias qmv='qmv -e "vim -u ~/.config/vim/vimrc" -f do'
 
 wp() {pkill -f wallpaper-random.sh; /home/hahi/scripts/wallpaper-random.sh "$@" &!}
 alias checkupdates='/home/hahi/scripts/updatecheck.sh'
-alias wpstop='/home/hahi/scripts/wallpaper-stop.sh'
-alias winxpstart='QEMU_AUDIO_DRV=alsa qemu-system-i386 -enable-kvm -cpu host -net none -soundhw es1370 -m 1024 -vga std -usbdevice tablet /mnt/storagetoshiba/software/image/WinXP/winxp.raw.overlay.1'
