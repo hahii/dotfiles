@@ -7,10 +7,10 @@
 
 # NOTE: TRACKSELECT in the command must remain unquoted, or quotation marks will be addded to the command (since it has spaces) and mess it up
 
-echo "Enter start time in hh:mm:ss"
+echo "Enter start time in [hh:]mm:ss"
 read STARTTIME
 
-echo "Enter clip duration in hh:mm:ss"
+echo "Enter clip duration in [hh:]mm:ss or just seconds"
 read DURATIONTIME
 
 echo "Enter output filename (including extension)"
