@@ -26,6 +26,6 @@
 # the file must NOT be CRLF format for this to work, so it is converted at the start of the script using s/\r$//
 
 for file in "$@"; do
-	sed -i 's/\r$//; s/((//g; s/))//g; s/♪♪～//g; s/♬～//g; s/♪～//g; s/[♪♬☎≪≫＜＞《》⦅⦆→➡]//g; s/([^)]*)//g; s/\[[^]]*\]//g; s/（[^）]*）//g' "$file"
+	sed -i 's/\r$//; s/((//g; s/))//g; s/♪♪～//g; s/♬～//g; s/♪～//g; s/[♪♬☎≪≫＜＞〈〉《》⦅⦆→➡]//g; s/([^)]*)//g; s/\[[^]]*\]//g; s/（[^）]*）//g' "$file"
 	sed -i '/^[0-9][0-9]:[0-9][0-9]:[0-9][0-9],[0-9][0-9][0-9] --> [0-9][0-9]:[0-9][0-9]:[0-9][0-9],[0-9][0-9][0-9]$/{n;s/$/~+~+~/}; /^~+~+~/d; s/~+~+~//' "$file"
 done
