@@ -5,19 +5,21 @@
 super + alt + Escape
 	bspc quit
 
-super + w
-	bspc window --close
 
-super + v
-	bspc control --toggle-visibility
+super + {_,shift + }w
+	bspc node --{close,kill}
+	
+# super + v
+#	bspc control --toggle-visibility
 
 super + t
 	bspc desktop --layout next
 
-super + {x,f}
-	bspc window --toggle {floating,private}
+super + x
+	bspc node --state \~floating
 
-
+super + f
+	bspc node --flag private
 
 
 
@@ -29,8 +31,8 @@ super + bracket{left,right}
 	bspc desktop --focus {prev,next}
 
 # change to specified desktop, shift to move window to specified desktop
-super + {_,shift + }{1-6}
-	bspc {desktop --focus,window --to-desktop} ^{1-6}
+super + {_,shift + }{1,2-6}
+	bspc {desktop --focus,node --to-desktop} ^{6,1-5}
 
 
 
@@ -41,41 +43,41 @@ super + {_,shift + }{1-6}
 #
 
 super + {_,shift + }c
-	bspc window --focus {next,prev}
+	bspc node --focus {next,prev}
 
 super + grave
-	bspc window --focus last
+	bspc node --focus last
 
 super + Tab
-	if bspc control --get-status | grep MHDMI-0 &> /dev/null ; then \
+	if bspc wm --get-status | grep MHDMI-0 &> /dev/null ; then \
 		bspc desktop --focus last.local; \
 	else \
 		bspc monitor --focus HDMI-0; \
 	fi
 
 super + apostrophe
-	bspc window --swap last
+	bspc node --swap last
 
 super + m
-	bspc window --swap biggest
+	bspc node --swap biggest
 
-super + {_,shift + }{h,j,k,l}
-	bspc window --{focus,swap} {left,down,up,right}
+super + {h,j,k,l}
+	bspc node --swap {west,south,north,east}
 
 super + {comma,period}
-	bspc desktop --circulate {backward,forward}
+	bspc node @/ --circulate {backward,forward}
 
 super + {r,shift + r,u}
-	bspc desktop --rotate {90,-90,180}
+	bspc node @/ --rotate {90,-90,180}
 
 super + {backslash,shift + backslash}
-	bspc desktop --flip {vertical,horizontal}
+	bspc node @/ --flip {vertical,horizontal}
 
 # cycles through history of previously focused windows, disabling the history while cycling to preserve original
 super + {o,i}
-	bspc control --record-history off; \
-	bspc window {older,newer} --focus; \
-	bspc control --record-history on
+	bspc wm --record-history off; \
+	bspc node {older,newer} --focus; \
+	bspc wm --record-history on
 
 
 
@@ -85,17 +87,19 @@ super + {o,i}
 # bspwm window sizing
 #
 
+# THESE 2 ARE BEING CHANGED AGAIN
+
 # EXPAND the area of the current window
-super + alt + {h,j,k,l}
-	bspc window --edge {left -10,down +10,up -10,right +10}
+# super + alt + {h,j,k,l}
+#	bspc node --resize {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 
 # CONTRACT the area of the current window
-super + alt + shift + {h,j,k,l}
-	bspc window --edge {right -10,up +10,down -10,left +10}
+#super + alt + shift + {h,j,k,l}
+#	bspc node --resize {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
 # balance sizes of all windows in desktop to occupy the same area
 super + b
-	bspc desktop --balance
+	bspc node @/ --balance
 
 
 
@@ -106,18 +110,18 @@ super + b
 #
 
 super + ctrl + {h,j,k,l}
-	bspc window --presel {left,down,up,right}
+	bspc node --presel-dir {west,south,north,east}
 
-super + ctrl + {_,shift + }space
-	bspc {window --presel cancel,desktop --cancel-presel}
+super + ctrl + space
+	bspc node --presel-dir cancel
 
 # sets the ratio for the preselect area
 super + ctrl + {1-9}
-	bspc window --ratio 0.{1-9}
+	bspc node --presel-ratio 0.{1-9}
 
 # move window into the last preselect
 super + y
-	bspc window --to-window last.manual
+	bspc node --to-node last.!automatic
 
 
 
