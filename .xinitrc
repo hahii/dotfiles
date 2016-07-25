@@ -14,7 +14,7 @@ uim-xim &
 export XMODIFIERS='@im=uim'
 
 #Time in seconds until monitor standby (just screen, not much energy save), suspend (screen+psu), poweroff (entirely off)
-xset dpms 0 1200 0
+xset dpms 0 1800 0
 
 #Disable Xscreensaver
 xset s off
@@ -29,7 +29,8 @@ setxkbmap -option ctrl:nocaps
 xsetroot -cursor_name left_ptr &
 
 #compositing for vsync, paint-on-overlay and glx-no-stencil improve performance, xrender-syncs fix issues
-compton --backend glx --vsync opengl-swc --paint-on-overlay --glx-no-stencil --xrender-sync --xrender-sync-fence -b
+# BROKEN compton --backend glx --vsync opengl-swc --paint-on-overlay --glx-no-stencil --xrender-sync --xrender-sync-fence -b
+compton --config /dev/null --backend glx --vsync opengl-swc --paint-on-overlay --glx-no-stencil --xrender-sync --xrender-sync-fence &!
 
 # MPD daemon start (if no other user instance exists)
 [ ! -s ~/.config/mpd/pid ] && mpd

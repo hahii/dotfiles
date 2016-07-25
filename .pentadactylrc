@@ -43,6 +43,7 @@ map -ex X :tabmove $
 map -ex C :set guioptions!=T
 map -ex , :tabdetach
 map -ex m :tabattach 1
+map -ex S :tabopen about:downloads
 
 
 map b <Nop>
