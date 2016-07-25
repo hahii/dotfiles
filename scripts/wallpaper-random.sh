@@ -27,6 +27,9 @@
 # immediately exit if any commands return non-zero
 set -e
 
+# wont run variable expansion if variable is unset, to make the rm in here safer
+set -u
+
 SLEEPTIME='5m'
 MONITORS=2
 SHOWINFO=1
