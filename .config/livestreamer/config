@@ -1,4 +1,4 @@
-player=mpv --cache=2048
+player=mpv --cache=2048 --screenshot-directory="/mnt/storage3t/images/snapshots/stream/"
 no-version-check
 verbose-player
 default-stream=best

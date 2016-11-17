@@ -9,7 +9,7 @@ super + alt + Escape
 super + {_,shift + }w
 	bspc node --{close,kill}
 	
-# super + v
+#super + v
 #	bspc control --toggle-visibility
 
 super + t
@@ -178,10 +178,10 @@ super + d
 	~/scripts/timepopup.sh
 
 Print
-	scrot '/mnt/storagetoshiba/images/%Y-%m-%d-%H%M%S_$wx$h.png'
+	scrot '/mnt/storage3t/images/snapshots/screen/%Y-%m-%d-%H%M%S_$wx$h.png'
 
 alt + Print
-	scrot -s '/mnt/storagetoshiba/images/%Y-%m-%d-%H%M%S_$wx$h.png'
+	scrot -s '/mnt/storage3t/images/snapshots/screen/%Y-%m-%d-%H%M%S_$wx$h.png'
 
 ctrl + Print
 	~/scripts/ssupload.sh
