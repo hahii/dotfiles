@@ -18,7 +18,7 @@
 # Note that this will background the script right away, so output
 # will messily appear in the shell, but only when you first start it.
 # If this is a problem, disable the informational output using the
-# SHOWINFO variable below.
+# showinfo variable below.
 #
 # This script requires tmsu and a recent git version of nitrogen.
 # Surround in quotes when specifying multiple tmsu tags.
@@ -30,22 +30,22 @@ set -e
 # wont run variable expansion if variable is unset, to make the rm in here safer
 set -u
 
-SLEEPTIME='5m'
-MONITORS=2
-SHOWINFO=1
-TAGDB="$XDG_DATA_HOME/tmsu/wallpaperdb"
+sleeptime='5m'
+monitors=2
+showinfo=1
+tagdb="$XDG_DATA_HOME/tmsu/wallpaperdb"
 
 # default tags for each monitor can be set here, will be overridden by command line tag arguments
-MONTAG0=""
-MONTAG1=""
-MONTAG2=""
-MONTAG3=""
+montag0=""
+montag1=""
+montag2=""
+montag3=""
 
 # tags that will NOT be changed by command line tag arguments 
-PMONTAG0="(3840 or 2560)"
-PMONTAG1="(3840 or 2560)"
-PMONTAG2=""
-PMONTAG3=""
+pmontag0="(3840 or 2560)"
+pmontag1="(3840 or 2560)"
+pmontag2=""
+pmontag3=""
 
 
 
@@ -57,27 +57,27 @@ while [[ "$#" > 0 ]]; do
 	key="$1"
 	case $key in
 		-s|--sleep)
-		SLEEPTIME="$2"
+		sleeptime="$2"
 		shift
 		;;
 		-ms|--monitors)
-		MONITORS="$2"
+		monitors="$2"
 		shift
 		;;
 		-m0|--monitor0)
-		MONTAG0="$2"
+		montag0="$2"
 		shift
 		;;
 		-m1|--monitor1)
-		MONTAG1="$2"
+		montag1="$2"
 		shift
 		;;
 		-m2|--monitor2)
-		MONTAG2="$2"
+		montag2="$2"
 		shift
 		;;
 		-m3|--monitor3)
-		MONTAG3="$2"
+		montag3="$2"
 		shift
 		;;
 		blank)
@@ -98,7 +98,7 @@ while [[ "$#" > 0 ]]; do
 		exit 1
 		;;
 		*)
-		MONTAG0="$1"
+		montag0="$1"
 		;;
 	esac
 	# shift moves all arguments down a number, disposing of the first argument.
@@ -108,8 +108,8 @@ while [[ "$#" > 0 ]]; do
 done
 
 # securely create a random directory in /tmp that starts with the script's basename. trap will then remove this directory automatically when the script ends as long as it terminates cleanly.
-TMPINFODIR=$(mktemp -dt "$(basename $0).XXXXXXXXXX")
-trap 'rm -rf "${TMPINFODIR}"' EXIT
+tmpinfodir=$(mktemp -dt "$(basename $0).XXXXXXXXXX")
+trap 'rm -rf "${tmpinfodir}"' EXIT
 
 
 # While we are using set -e at the start, there are limitations
@@ -126,73 +126,73 @@ trap 'rm -rf "${TMPINFODIR}"' EXIT
 # use these created variables throughout the rest of the script
 # to speed it up, but I don't think the effort is worth it for now.
 
-COUNTER=0
-while [ $COUNTER -lt $MONITORS ]; do
-	MONTAGC=MONTAG${COUNTER}
-	PMONTAGC=PMONTAG${COUNTER}
-	if [[ $MONTAG0 ]] && [[ ! "${!MONTAGC}" ]]; then
-		MONTAGC=MONTAG0
+counter=0
+while [ $counter -lt $monitors ]; do
+	montagc=montag${counter}
+	pmontagc=pmontag${counter}
+	if [[ $montag0 ]] && [[ ! "${!montagc}" ]]; then
+		montagc=montag0
 	fi
-	TAGFILELIST="$( tmsu --database=${TAGDB} files "${!PMONTAGC} ${!MONTAGC}" )"
-	let COUNTER=COUNTER+1
+	tagfilelist="$( tmsu --database=${tagdb} files "${!pmontagc} ${!montagc}" )"
+	let counter=counter+1
 done
 
 
 # This section will output informational text ONLY WHEN FIRST STARTING
-# the script if the SHOWINFO variable is set to 1. The reason for
+# the script if the showinfo variable is set to 1. The reason for
 # all of the conditionals is to form proper sentences regardless of
 # the number of monitors being set. Might actually be more readable
 # to not use full sentences but whatever. 
-COUNTER=0
-while [  $SHOWINFO -eq 1 ] && [ $COUNTER -lt $MONITORS ]; do
-	if [[ $COUNTER -eq 0 ]]; then
-		echo -n "Shuffling every ${SLEEPTIME} through " 
+counter=0
+while [  $showinfo -eq 1 ] && [ $counter -lt $monitors ]; do
+	if [[ $counter -eq 0 ]]; then
+		echo -n "Shuffling every ${sleeptime} through " 
 	fi
-	if [[ $MONITORS -eq 2 ]] && [[ $COUNTER -eq $MONITORS-1 ]]; then
+	if [[ $monitors -eq 2 ]] && [[ $counter -eq $monitors-1 ]]; then
 		echo -n " "
 	fi
-	if [[ $MONITORS -gt 1 ]] && [[ $COUNTER -eq $MONITORS-1 ]]; then
+	if [[ $monitors -gt 1 ]] && [[ $counter -eq $monitors-1 ]]; then
 		echo -n "and "
 	fi
 
-	MONTAGC=MONTAG${COUNTER}
-	PMONTAGC=PMONTAG${COUNTER}
-	if [[ $MONTAG0 ]] && [[ ! "${!MONTAGC}" ]]; then
-		MONTAGC=MONTAG0
+	montagc=montag${counter}
+	pmontagc=pmontag${counter}
+	if [[ $montag0 ]] && [[ ! "${!montagc}" ]]; then
+		montagc=montag0
 	fi
-	echo -n "$(tmsu --database=${TAGDB} files "${!PMONTAGC} ${!MONTAGC}" | wc -l) wallpapers tagged ${!MONTAGC}"
+	echo -n "$(tmsu --database=${tagdb} files "${!pmontagc} ${!montagc}" | wc -l) wallpapers tagged ${!montagc}"
 	
-	if [[ $MONITORS -gt 1 ]]; then
-		echo -n " on monitor $COUNTER"
+	if [[ $monitors -gt 1 ]]; then
+		echo -n " on monitor $counter"
 	fi
-	if [[ $MONITORS -gt 2 ]]  && [[ $COUNTER -lt $MONITORS-1 ]]; then
+	if [[ $monitors -gt 2 ]]  && [[ $counter -lt $monitors-1 ]]; then
 		echo -n ", "
 	fi
-	if [[ $COUNTER -eq $MONITORS-1 ]]; then
+	if [[ $counter -eq $monitors-1 ]]; then
 		echo "."
 	fi
 
-	let COUNTER=COUNTER+1
+	let counter=counter+1
 done
 
 
 
 while true; do
-	COUNTER=0
-	while [ $COUNTER -lt $MONITORS ]; do
+	counter=0
+	while [ $counter -lt $monitors ]; do
 		# to nest variables in bash you have to do it like this in a new variable and then reference it using an exclamation point
-		MONTAGC=MONTAG${COUNTER}
-		PMONTAGC=PMONTAG${COUNTER}
+		montagc=montag${counter}
+		pmontagc=pmontag${counter}
 		# for multiple monitors, montag above 0 will be empty if tags aren't specified for each monitor individually. If montag0 is not empty and the current monitor is, we can assume we want those tags used for the current monitor (useful when you don't want to specify the same tags for every monitor 1 by 1)
 		# if you DO want a secondary monitor to not have any tags (meaning all wallpapers will be shown) despite the first monitor having tags, specify a space " " using -m and that montag will not be seen as empty by this check, but tmsu will still see it as no tags and list all files
-		if [[ $MONTAG0 ]] && [[ ! "${!MONTAGC}" ]]; then
-			MONTAGC=MONTAG0
+		if [[ $montag0 ]] && [[ ! "${!montagc}" ]]; then
+			montagc=montag0
 		fi
-		nitrogen --head=$COUNTER --set-zoom-fill "$(tmsu --database=${TAGDB} files "${!PMONTAGC} ${!MONTAGC}" | shuf -n1 | tee -a "${TMPINFODIR}/current_wallpaper" )"
+		nitrogen --head=$counter --set-zoom-fill "$(tmsu --database=${tagdb} files "${!pmontagc} ${!montagc}" | shuf -n1 | tee -a "${tmpinfodir}/current_wallpaper" )"
 		# note we tee the output of ls to a file in the /tmp directory so the currently used wallpaper can be checked externally
-		let COUNTER=COUNTER+1
+		let counter=counter+1
 	done
-	sleep ${SLEEPTIME}
+	sleep ${sleeptime}
 done
 
 exit 0

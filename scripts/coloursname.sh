@@ -4,23 +4,23 @@
 # Modified by Aaron Griffin
 # and further by Kazuo Teramoto
 # and further by
-FGNAMES=(' black ' '  red  ' ' green ' ' yellow' '  blue ' 'magenta' '  cyan ' ' white ')
-BGNAMES=('DFT' 'BLK' 'RED' 'GRN' 'YEL' 'BLU' 'MAG' 'CYN' 'WHT')
+fgnames=(' black ' '  red  ' ' green ' ' yellow' '  blue ' 'magenta' '  cyan ' ' white ')
+bgnames=('DFT' 'BLK' 'RED' 'GRN' 'YEL' 'BLU' 'MAG' 'CYN' 'WHT')
 
 for b in {0..8}; do
   ((b>0)) && bg=$((b+39))
 
-  echo -en "\033[0m ${BGNAMES[b]}  "
+  echo -en "\033[0m ${bgnames[b]}  "
   
   for f in {0..7}; do
-    echo -en "\033[${bg}m\033[$((f+30))m ${FGNAMES[f]} "
+    echo -en "\033[${bg}m\033[$((f+30))m ${fgnames[f]} "
   done
   
   echo -en "\033[0m "
   echo -en "\033[0m\n\033[0m      "
   
   for f in {0..7}; do
-    echo -en "\033[${bg}m\033[1;$((f+30))m ${FGNAMES[f]} "
+    echo -en "\033[${bg}m\033[1;$((f+30))m ${fgnames[f]} "
   done
 
   echo -en "\033[0m "
