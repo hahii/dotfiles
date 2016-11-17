@@ -49,3 +49,6 @@ map -ex S :tabopen about:downloads
 map b <Nop>
 map i <Nop>
 map M <Nop>
+map zz <Nop>
+map + <Nop>
+map \- <Nop>
