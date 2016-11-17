@@ -1,6 +1,6 @@
 #!/bin/bash
 
-screenshot_dir="/mnt/storagetoshiba/images/"
+screenshot_dir="/mnt/storage3t/images/snapshots/screen/"
 filename_format='%Y-%m-%d-%H%M%S_$wx$h'
 file_extension=".png"
 image_host="uguu.se"
