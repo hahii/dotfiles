@@ -25,7 +25,30 @@
 # this must also be on its own sed call for some reason or it breaks the entire thing
 # the file must NOT be CRLF format for this to work, so it is converted at the start of the script using s/\r$//
 
+if [[ $# -eq 0 ]]; then
+	echo "$(basename $0): .srt file(s) required"
+	exit 1
+fi
+
+for file in "$@"; do
+	if [[ "$file" != *.srt ]]; then
+		echo "$(basename $0): $file is not a .srt file."
+		echo "$(basename $0): No files have been edited."
+		exit 1
+	fi
+done
+
+filecounter=0
+
 for file in "$@"; do
 	sed -i 's/\r$//; s/((//g; s/))//g; s/♪♪～//g; s/♬～//g; s/♪～//g; s/[♪♬☎≪≫＜＞〈〉《》⦅⦆→➡]//g; s/([^)]*)//g; s/\[[^]]*\]//g; s/（[^）]*）//g' "$file"
 	sed -i '/^[0-9][0-9]:[0-9][0-9]:[0-9][0-9],[0-9][0-9][0-9] --> [0-9][0-9]:[0-9][0-9]:[0-9][0-9],[0-9][0-9][0-9]$/{n;s/$/~+~+~/}; /^~+~+~/d; s/~+~+~//' "$file"
+	((filecounter++))
 done
+
+if [ "$filecounter" -eq 1 ]; then
+	echo "$(basename $0): $filecounter file edited."
+fi
+if [ "$filecounter" -gt 1 ]; then
+	echo "$(basename $0): $filecounter files edited."
+fi
