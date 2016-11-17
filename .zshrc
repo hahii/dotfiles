@@ -100,12 +100,15 @@ export LESSHISTFILE="$XDG_CACHE_HOME/lesshst"
 
 alias ls='LC_COLLATE="en_US.UTF-8" ls -N --human-readable --almost-all --color=auto --group-directories-first'
 
+alias cp='cp --preserve=timestamps'
+
 alias grep='grep --color=auto'
 
 alias bc='bc -ql'
 
 alias stor1='cd /mnt/storagetoshiba/'
 alias stor2='cd /mnt/storagewd/backup/'
+alias stor3='cd /mnt/storage3t/'
 
 
 # aliases to use .config directory for config files
@@ -121,5 +124,6 @@ alias qmv='qmv -e "vim -u ~/.config/vim/vimrc" -f do'
 # script aliases
 
 wp() {pkill -f wallpaper-random.sh; /home/hahi/scripts/wallpaper-random.sh "$@" &!}
-t() {/usr/bin/mpv "https://twitch.tv/$1" --ytdl-format=$2}
+t() {/usr/bin/mpv --vo=opengl-hq "https://twitch.tv/$1" --ytdl-format=$2 --screenshot-directory="/mnt/storage3t/images/snapshots/stream/"}
+s() {find -iname "*$@*"}
 alias checkupdates='/home/hahi/scripts/updatecheck.sh'
