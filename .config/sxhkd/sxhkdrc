@@ -9,8 +9,11 @@ super + alt + Escape
 super + {_,shift + }w
 	bspc node --{close,kill}
 	
-#super + v
-#	bspc control --toggle-visibility
+super + v
+	bspc node @/ --flag hidden
+
+super + shift + v
+	for id in $(bspc query -D); do bspc node @${id}:/ --flag hidden; done
 
 super + t
 	bspc desktop --layout next
@@ -31,8 +34,8 @@ super + bracket{left,right}
 	bspc desktop --focus {prev,next}
 
 # change to specified desktop, shift to move window to specified desktop
-super + {_,shift + }{1,2-6}
-	bspc {desktop --focus,node --to-desktop} ^{6,1-5}
+super + {_,shift + }{1,2-6,7}
+	bspc {desktop --focus,node --to-desktop} ^{6,1-5,7}
 
 
 
@@ -43,7 +46,7 @@ super + {_,shift + }{1,2-6}
 #
 
 super + {_,shift + }c
-	bspc node --focus {next,prev}
+	bspc node --focus {next.local,prev.local}
 
 super + grave
 	bspc node --focus last
@@ -59,7 +62,7 @@ super + apostrophe
 	bspc node --swap last
 
 super + m
-	bspc node --swap biggest
+	bspc node --swap biggest.local
 
 super + {h,j,k,l}
 	bspc node --swap {west,south,north,east}
@@ -127,23 +130,6 @@ super + y
 
 
 
-#
-# bspwm mouse functionality, don't touch these
-#
-
-~button1
-	bspc pointer --grab focus
-
-super + button{1-3}
-	bspc pointer --grab {move,resize_side,resize_corner}
-
-# pass x and y coordinates on movement to the above command
-super + !button{1-3}
-	bspc pointer --track %i %i
-
-# on click release
-super + @button{1-3}
-	bspc pointer --ungrab
 
 
 
@@ -178,10 +164,10 @@ super + d
 	~/scripts/timepopup.sh
 
 Print
-	scrot '/mnt/storage3t/images/snapshots/screen/%Y-%m-%d-%H%M%S_$wx$h.png'
+	maim "/mnt/storage3t/images/snapshots/screen/$(date +%Y-%m-%d-%H%M%S).png"
 
 alt + Print
-	scrot -s '/mnt/storage3t/images/snapshots/screen/%Y-%m-%d-%H%M%S_$wx$h.png'
+	maim -g "$(slop)" "/mnt/storage3t/images/snapshots/screen/$(date +%Y-%m-%d-%H%M%S).png"
 
 ctrl + Print
 	~/scripts/ssupload.sh
