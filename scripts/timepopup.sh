@@ -2,8 +2,8 @@
 popup_duration="3"
 
 for i in $(seq 1 ${popup_duration}); do \
-	LC_ALL="en-US.utf8" date +"%A %Y-%m-%d %H:%M:%S %Z"; \
-	LC_ALL="en-US.utf8" TZ="CET" date +"%A %Y-%m-%d %H:%M:%S %Z"; \
+	date +"%Y年%-m月%-d日（%a） %H:%M:%S %Z"; \
+	TZ="CET" date +"%Y年%-m月%-d日（%a） %H:%M:%S %Z"; \
 	TZ="Japan" date +"%Y年%-m月%-d日（%a） %H:%M:%S %Z"; \
 	sleep 1; \
 done \
