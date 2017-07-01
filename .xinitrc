@@ -16,10 +16,10 @@ xrandr --output HDMI-0 --auto --output DVI-I-1 --auto --right-of HDMI-0
 nitrogen --restore &
 
 #Japanese input
-export GTK_IM_MODULE='uim'
-export QT_IM_MODULE='uim'
-uim-xim &
-export XMODIFIERS='@im=uim'
+export GTK_IM_MODULE='fcitx'
+export QT_IM_MODULE='fcitx'
+fcitx &
+export XMODIFIERS='@im=fcitx'
 
 #Time in seconds until monitor standby (just screen, not much energy save), suspend (screen+psu), poweroff (entirely off)
 #xset dpms 0 1800 0
@@ -33,15 +33,18 @@ xset s off
 #typematic (keyboard repeat/delay) settings, ms delay, Hz speed
 xset r rate 250 25
 
-#caps lock key mirrors left ctrl
-setxkbmap -option ctrl:nocaps
+#caps lock key mirrors escape
+setxkbmap -option caps:swapescape
+
+#ctrl (and now caps lock) is escape key when pressed on its own
+#xcape -e 'Control_L=Escape'
 
 #this is required to fix cursor for bspwm, not sure why it isn't needed with dwm
 xsetroot -cursor_name left_ptr &
 
 #compositing for vsync, paint-on-overlay and glx-no-stencil improve performance, xrender-syncs fix issues
-# BROKEN compton --backend glx --vsync opengl-swc --paint-on-overlay --glx-no-stencil --xrender-sync --xrender-sync-fence -b
-compton --config /dev/null --backend glx --vsync opengl-swc --paint-on-overlay --glx-no-stencil --xrender-sync --xrender-sync-fence &!
+compton --config /dev/null --backend glx --vsync opengl-swc --paint-on-overlay --glx-no-stencil --xrender-sync --xrender-sync-fence -b
+# compton --config /dev/null --backend glx --vsync opengl-swc --paint-on-overlay --glx-no-stencil --xrender-sync --xrender-sync-fence &!
 
 # MPD daemon start (if no other user instance exists)
 [ ! -s ~/.config/mpd/pid ] && mpd

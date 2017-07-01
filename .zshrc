@@ -124,6 +124,6 @@ alias qmv='qmv -e "vim -u ~/.config/vim/vimrc" -f do'
 # script aliases
 
 wp() {pkill -f wallpaper-random.sh; /home/hahi/scripts/wallpaper-random.sh "$@" &!}
-t() {/usr/bin/mpv --vo=opengl-hq "https://twitch.tv/$1" --ytdl-format=$2 --screenshot-directory="/mnt/storage3t/images/snapshots/stream/"}
+t() {/usr/bin/mpv --vo=opengl --profile=opengl-hq "https://twitch.tv/$1" --ytdl-format=$2 --screenshot-directory="/mnt/storage3t/images/snapshots/stream/" --input-conf="~/.config/mpv/stream-input.conf"}
 s() {find -iname "*$@*"}
 alias checkupdates='/home/hahi/scripts/updatecheck.sh'
