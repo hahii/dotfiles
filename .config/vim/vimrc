@@ -40,11 +40,9 @@ colorscheme custom_dark
 
 
 " set backup files to contain timestamp in format _YYYYMMDD-HHMM
-" NOTE this will only set the timestamp once when opening vim, meaning only one backup file (continuously overwritten) will be kept until vim is reopened
 set backup		" keep a backup file
-let backupextvar = strftime("%Y%m%d-%H%M")
-let backupextvar = "set backupext=_". backupextvar
-execute backupextvar
+set backupdir=$XDG_DATA_HOME/vim/backup
+au BufWritePre * let &backupext = '_' . strftime("%Y%m%d-%H%M")
 
 
 " set leader key to something else so we can use backslash without conflict
@@ -87,10 +85,12 @@ map <F8> :so $VIMRUNTIME/syntax/hitest.vim<CR>
 
 " open CtrlP buffer list
 map <Space> :CtrlPBuffer<CR>
+" open CtrlP MRU list. 
+map <F9> :CtrlPMRU<CR>
 " open CtrlP MRU list. for some reason NUL is ctrl-space
-map <NUL> :CtrlPMRU<CR>
+"map <NUL> :CtrlPMRU<CR>
 " unmap ctrl-space from insert mode as it does weird stuff
-imap <NUL> <Nop>
+"imap <NUL> <Nop>
 
 " backspace and backslash go backwards and forwards in cursor location
 noremap <BS> <C-o>
