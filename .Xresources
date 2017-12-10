@@ -14,7 +14,7 @@ URxvt*.depth: 32
 URxvt*.background: [50]#000000
 
 ! plugins
-URxvt*.perl-ext-common:      default,clipboard,url-select,keyboard-select,matcher
+URxvt*.perl-ext-common:      default,url-select,keyboard-select,matcher
 
 ! urxvt-perls url-select
 URxvt*.url-select.launcher:  firefox
@@ -31,16 +31,12 @@ URxvt*.matcher.button:       3
 URxvt*.keysym.M-x:           perl:keyboard-select:activate
 URxvt*.keysym.M-s:           perl:keyboard-select:search
 
-! urxvt-perls clipboard
-URxvt*.keysym.M-c:           perl:clipboard:copy
-URxvt*.keysym.M-v:           perl:clipboard:paste
-URxvt*.keysym.M-C-v:         perl:clipboard:paste_escaped
-
 ! compositor background change
 URxvt*.keysym.M-i:           command:\033]11;[50]#000000\007
 URxvt*.keysym.M-o:           command:\033]11;#151515\007
 
 
+URxvt*.keysym.M-p:           urxvt -cd "$(pwd)" &!\n
 
 URxvt*.foreground: #F8F8F8
 ! URxvt*.background: #282828
