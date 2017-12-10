@@ -46,8 +46,8 @@ xsetroot -cursor_name left_ptr &
 compton --config /dev/null --backend glx --vsync opengl-swc --paint-on-overlay --glx-no-stencil --xrender-sync --xrender-sync-fence -b
 # compton --config /dev/null --backend glx --vsync opengl-swc --paint-on-overlay --glx-no-stencil --xrender-sync --xrender-sync-fence &!
 
-# MPD daemon start (if no other user instance exists)
-[ ! -s ~/.config/mpd/pid ] && mpd
+#start clipboard manager
+clipster -d &
 
 #start bspwm
 sxhkd &

@@ -36,3 +36,6 @@ def_key "N"
 
 def_key "d"
   delete_playlist_items
+
+def_key "l"
+  show_lyrics

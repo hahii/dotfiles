@@ -2,8 +2,7 @@ set nocompatible	" Vi incompatible settings (must be first as it affects other o
 
 " change .vim, swap, backup, viminfo directories
 set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
-set directory=~/.local/share/vim/swap//,/tmp
-set backupdir=~/.local/share/vim/backup,/tmp
+set directory=~/.cache/vim/swap//,/tmp
 set viminfo+=<1000				" copy up to 1000 lines (default 50)
 set viminfo+=n~/.local/share/vim/viminfo	" old sessions will use and recreate old location, this MUST BE THE LAST SET VIMINFO
 
@@ -38,10 +37,12 @@ set statusline=%<%F\ (%LL)\ %#WarningMsg#%M%#ErrorMsg#%R%##%=%y[%{&ff}][%{&fenc}
 syntax on		" syntax highlighting
 colorscheme custom_dark
 
+" automatically enable the Colorizer plugin for certain filetypes, note it's laggy for huge files
+" let g:colorizer_auto_filetype='css,html'
 
 " set backup files to contain timestamp in format _YYYYMMDD-HHMM
 set backup		" keep a backup file
-set backupdir=$XDG_DATA_HOME/vim/backup
+set backupdir=$XDG_CACHE_HOME/vim/backup
 au BufWritePre * let &backupext = '_' . strftime("%Y%m%d-%H%M")
 
 
@@ -92,6 +93,9 @@ map <F9> :CtrlPMRU<CR>
 " unmap ctrl-space from insert mode as it does weird stuff
 "imap <NUL> <Nop>
 
+" toggle Colorizer plugin
+map <F10> :ColorToggle<CR>
+
 " backspace and backslash go backwards and forwards in cursor location
 noremap <BS> <C-o>
 noremap <Bslash> <C-i>
@@ -99,8 +103,11 @@ noremap <Bslash> <C-i>
 " tab switches between last used file (same as ctrl-6)
 noremap <Tab> <C-^>
 
-" replace Q EX mode with indentation formatting
-noremap Q =
+" exit on q
+map q :q<CR>
+
+" replace Q EX mode with record macro
+noremap Q q
 
 " change buffers
 map <silent> - :bprev<CR>

@@ -15,7 +15,8 @@ playlist_display_mode = columns
 tags_separator = "; "
 
 main_window_color = default
-main_window_highlight_color = white
+current_item_prefix = "$(white)$r"
+current_item_suffix = "$/r$(end)"
 progressbar_elapsed_color = default
 color1 = default
 color2 = default
