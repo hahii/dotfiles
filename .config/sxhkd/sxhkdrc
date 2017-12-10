@@ -7,13 +7,16 @@ super + alt + Escape
 
 
 super + {_,shift + }w
-	bspc node --{close,kill}
+	bspc node --{close,kill} && bspc node --focus biggest.local && bspc node @brother --balance && bspc node --focus last
 	
 super + v
-	bspc node @/ --flag hidden
+	bspc node --flag hidden
 
 super + shift + v
-	for id in $(bspc query -D); do bspc node @${id}:/ --flag hidden; done
+	bspc query --nodes -n .hidden.local | xargs -I NODEID -n 1 bspc node NODEID --flag hidden=off
+
+super + ctrl + v
+	for id in $(bspc query --desktops); do bspc node @${id}:/ --flag hidden; done
 
 super + t
 	bspc desktop --layout next
@@ -31,7 +34,7 @@ super + f
 #
 
 super + bracket{left,right}
-	bspc desktop --focus {prev,next}
+	bspc desktop --focus {prev,next}.local
 
 # change to specified desktop, shift to move window to specified desktop
 super + {_,shift + }{1,2-6,7}
@@ -46,7 +49,7 @@ super + {_,shift + }{1,2-6,7}
 #
 
 super + {_,shift + }c
-	bspc node --focus {next.local,prev.local}
+	bspc node --focus {next,prev}.local
 
 super + grave
 	bspc node --focus last
@@ -90,19 +93,17 @@ super + {o,i}
 # bspwm window sizing
 #
 
-# THESE 2 ARE BEING CHANGED AGAIN
-
 # EXPAND the area of the current window
-# super + alt + {h,j,k,l}
-#	bspc node --resize {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+super + alt + {h,j,k,l}
+	bspc node --resize {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 
 # CONTRACT the area of the current window
-#super + alt + shift + {h,j,k,l}
-#	bspc node --resize {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+super + alt + shift + {h,j,k,l}
+	bspc node --resize {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
 # balance sizes of all windows in desktop to occupy the same area
 super + b
-	bspc node @/ --balance
+	bspc node --focus biggest.local && bspc node @brother --balance && bspc node --focus last
 
 
 
@@ -139,8 +140,8 @@ super + y
 # wm independent hotkeys
 #
 
-super + shift + Return
-	urxvt
+super + Return
+	if [[ $(bspc query -N -n biggest.local) == $(bspc query -N -n .focused.local) ]]; then bspc node --focus prev.local; fi; urxvt &!; sleep 0.1s; bspc node --focus biggest.local && bspc node @brother --balance && bspc node --focus last
 
 super + z
 	firefox
@@ -154,6 +155,21 @@ super + s
 super + shift + a
 	amixer -q set Master toggle
 
+super + ctrl + a
+	~/scripts/windowvol +5%
+
+super + ctrl + s
+	~/scripts/windowvol -5%
+
+super + ctrl + shift + a
+	~/scripts/windowvol mute
+
+super + ctrl + d
+	~/scripts/windowvol 100%
+
+super + ctrl + f
+	pavucontrol
+
 super + shift + s
 	mpc -q toggle
 
@@ -161,7 +177,7 @@ super + shift + {z,x}
 	mpc -q {prev,next}
 
 super + d
-	~/scripts/timepopup.sh
+	~/scripts/timepopup
 
 Print
 	maim "/mnt/storage3t/images/snapshots/screen/$(date +%Y-%m-%d-%H%M%S).png"
@@ -170,7 +186,7 @@ alt + Print
 	maim -g "$(slop)" "/mnt/storage3t/images/snapshots/screen/$(date +%Y-%m-%d-%H%M%S).png"
 
 ctrl + Print
-	~/scripts/ssupload.sh
+	~/scripts/ssupload
 
 # make sxhkd reload its configuration files:
 super + Escape
