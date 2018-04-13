@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 url="$(curl -sf -F randomname=xxxxxx -F file=@"$1" https://uguu.se/api.php?d=upload-tool)"
 

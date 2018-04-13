@@ -1,7 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # pass image files with res in the filename like 1920x1080 and it will notify you if different from actual res
-# example: check_image_res.sh /wherever/you/want/*/*
+# example: check_image_res /wherever/you/want/*/*
 
 for file in "$@"; do
 	realres="$(identify -format '%wx%h' "$file")"

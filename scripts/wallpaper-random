@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #
 # idk what im doing
 #
@@ -12,7 +12,7 @@
 #   If not, see <http://creativecommons.org/publicdomain/zero/1.0/>. 
 #
 # Might want to use the following bash/zsh function with this script
-#    wp() {pkill -f wallpaper-random.sh; /home/hahi/scripts/wallpaper-random.sh "$@" &}
+#    wp() {pkill -f wallpaper-random; /home/hahi/scripts/wallpaper-random "$@" &}
 # and disown the process. zsh users can use &! instead for this.
 # Aliases in bash/zsh cannot take parameters, so use a function.
 # Note that this will background the script right away, so output

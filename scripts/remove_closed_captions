@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # This script removes the following symbols from japanese .srt files:
 #	♪♪～ ♬～ ♪～ ♪ ♬	(BGM)

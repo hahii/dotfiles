@@ -7,4 +7,4 @@ bind-key k up
 bind-key h left
 bind-key l right
 
-include "~/.config/newsbeuter/killfile"
+include "~/.config/newsboat/killfile"

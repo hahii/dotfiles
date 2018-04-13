@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 screenshot_dir="/mnt/storage3t/images/snapshots/screen/"
 filename_format="$(date +%Y-%m-%d-%H%M%S)"
@@ -10,7 +10,7 @@ notification="dzen2"
 notification_args=(-w 400 -h 50 -x 20 -y 20 -fg '#282828' -bg '#ff99cc' -fn '-*-dejavu sans-medium-r-normal--13-*-*-*-*-*-iso10646-1' -p 3)
 
 
-maim -g "$(slop)" "${file}"
+maim --hidecursor -g "$(slop)" "${file}"
 
 
 if [[ $image_host == "pomf.se" ]]; then

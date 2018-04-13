@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 popup_duration="3"
 
 for i in $(seq 1 ${popup_duration}); do \
