@@ -137,9 +137,11 @@ alias ls='LC_COLLATE="en_US.UTF-8" ls -N --human-readable --almost-all --color=a
 
 alias cp='cp --preserve=timestamps'
 
-alias grep='grep --color=always'
+alias grep='grep --color=auto'
 
 alias bc='bc -ql'
+
+alias ffprobe='ffprobe -hide_banner'
 
 alias stor1='cd /mnt/storagetoshiba/'
 alias stor2='cd /mnt/storagewd/backup/'
@@ -148,7 +150,7 @@ alias stor3='cd /mnt/storage3t/'
 
 # aliases to use .config directory for config files
 
-alias anki='anki -b ~/.config/anki'
+#alias anki='anki -b ~/.config/anki'
 alias vim='vim -u ~/.config/vim/vimrc'
 alias vimdiff='vimdiff -u ~/.config/vim/vimrc'
 alias weechat='weechat -d ~/.config/weechat'
@@ -156,13 +158,16 @@ alias tmsu='tmsu --database=$XDG_DATA_HOME/tmsu/wallpaperdb'
 alias qmv='qmv -e "vim -u ~/.config/vim/vimrc" -f do'
 
 
-# script aliases
+# functions
 
 wp() {pkill -f wallpaper-random; /home/hahi/scripts/wallpaper-random "$@" &!}
 t() {until /usr/bin/mpv --vo=opengl --profile=opengl-hq "https://twitch.tv/$1" --ytdl-format=$2 --screenshot-directory="/mnt/storage3t/images/snapshots/stream/" --demuxer-lavf-probe-info=yes --input-conf="~/.config/mpv/stream-input.conf"; do echo "Retrying in 15 seconds."; sleep 15; done}
 s() {find -iname "*$@*" | sort}
 g() {grep -i "$@" **}
 nocom() {grep "^[^#;]" "$@" | less}
+dud() {du -hd1 "$@" | sort -hr}
+dua() {du -had1 "$@" | sort -hr}
+
 
 # colourized man pages
 # md is bold, us is underline
