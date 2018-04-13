@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# mpv's config must have write-filename-in-watch-later-config enabled for this to work
+
+# define the terminal escape codes for colours that can be used with echo -e
+grey='\033[38;5;250m'
+green='\033[0;32m'
+nocolour='\033[0m'
+
+echo ""
+
+# for pausetime, the second part of sed looks for lines starting with the seconds pattern mpv uses in the file (for example, 622.122000) and feeds that into the date command (\1 is replaced by what was surrounded in parentheses earlier, and e at the end executes the command instead of simply replacing it as text) to convert it to Hours:Minutes:Seconds
+# the last part of the pausetime sed removes the hours part of the time if it's empty (00:)
+
+# note you have to use * at the end of the ls path for it to return full paths instead of relative paths, so the script can be run from any directory
+# note we use -t with ls so the results will be sorted by most recently watched
+
+for file in $(ls -t ~/.config/mpv/watch_later/*); do
+	filename="$(grep '^#' "$file" | sed 's/^# //')"
+	pausetime="$(grep '^start=' "$file" | sed -r 's/^start=//; s/^([0-9]+\.[0-9]+$)/date -d@\1 -u +"%H:%M:%S"/e; s/^00://')"
+	lastplayed="$(date +"%Y年%-m月%-d日（%a） %H:%M %Z" -r "$file")"
+
+	echo -e "${grey}$filename${nocolour}\n$lastplayed\nPlayback: ${green}$pausetime${nocolour}\n"
+done

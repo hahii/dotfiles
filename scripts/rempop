@@ -1,0 +1,58 @@
+#!/usr/bin/env bash
+
+# USAGE:
+#	rempop <optional colour scheme name> <message>
+# use in conjunction with sleep, for example
+# 	sleep 30m; rempop red SOMETHING
+
+# default colour scheme is "yellow"
+fgcolour="#282828"
+bgcolour="#ffff00"
+
+# shift moves all arguments down a number, disposing of the first argument.
+# basically we have to remove the colour command from the arguments list so it doesn't show up in the message
+case "$1" in
+	yellow)
+	fgcolour="#282828"
+	bgcolour="#ffff00"
+	shift
+	;;
+	red)
+	fgcolour="#FFFFFF"
+	bgcolour="#FF3838"
+	shift
+	;;
+	blue)
+	fgcolour="#FFFFFF"
+	bgcolour="#50D1FF"
+	shift
+	;;
+	green)
+	fgcolour="#282828"
+	bgcolour="#5CFF50"
+	shift
+	;;
+	black)
+	fgcolour="#E8E8E8"
+	bgcolour="#282828"
+	shift
+	;;
+	pink)
+	fgcolour="#FFFFFF"
+	bgcolour="#FF80B6"
+	shift
+	;;
+	purple)
+	fgcolour="#282828"
+	bgcolour="#C45BFF"
+	shift
+	;;
+	orange)
+	fgcolour="#E8E8E8"
+	bgcolour="#FF7321"
+	shift
+	;;
+esac
+
+
+echo "$@" | dzen2 -p -w 1500 -h 1000 -x 3000 -y 150 -fg "$fgcolour" -bg "$bgcolour" -fn '-*-*-*-*-*-*-150-*-*-*-*-*-iso10646-1' -sa c -e 'button3=exit'
