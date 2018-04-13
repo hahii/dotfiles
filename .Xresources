@@ -18,7 +18,6 @@ URxvt*.perl-ext-common:      default,url-select,keyboard-select,matcher
 
 ! urxvt-perls url-select
 URxvt*.url-select.launcher:  firefox
-URxvt*.url-select.underline: true
 URxvt*.keysym.M-u:           perl:url-select:select_next
 URxvt*.url-select.button:    2
 
@@ -26,6 +25,7 @@ URxvt*.url-select.button:    2
 URxvt*.url-launcher:         mpv
 URxvt*.keysym.M-y:           matcher:select
 URxvt*.matcher.button:       3
+!URxvt*.matcher.rend.0: -Uline
 
 ! urxvt-perls keyboard-select
 URxvt*.keysym.M-x:           perl:keyboard-select:activate
@@ -40,7 +40,7 @@ URxvt*.keysym.M-p:           urxvt -cd "$(pwd)" &!\n
 
 URxvt*.foreground: #F8F8F8
 ! URxvt*.background: #282828
-URxvt*.colorUL: #FF99CC
+! URxvt*.colorUL: #FF99CC
 
 URxvt*.color0: #2A0150
 URxvt*.color1: #FF2457
