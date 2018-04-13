@@ -37,8 +37,8 @@ super + bracket{left,right}
 	bspc desktop --focus {prev,next}.local
 
 # change to specified desktop, shift to move window to specified desktop
-super + {_,shift + }{1,2-6,7}
-	bspc {desktop --focus,node --to-desktop} ^{6,1-5,7}
+super + {_,shift + }{1-7}
+	bspc {desktop --focus,node --to-desktop} ^{6-7,1-5}
 
 
 
