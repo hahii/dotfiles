@@ -2,7 +2,7 @@ Xcursor.theme: Vanilla-DMZ
 Xcursor.size: 25
 
 URxvt*.scrollBar: false
-URxvt*.font: xft:envy code r:size=9, xft:otf-ipafont:size=9
+URxvt*.font: xft:envy code r:size=9, xft:umeplus p gothic:size=9
 
 ! non-composited transparency
 ! URxvt*.transparent: true
