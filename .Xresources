@@ -35,6 +35,8 @@ URxvt*.keysym.M-s:           perl:keyboard-select:search
 URxvt*.keysym.M-i:           command:\033]11;[50]#000000\007
 URxvt*.keysym.M-o:           command:\033]11;#151515\007
 
+! disable annoying stuff when pressing ctrl+shift
+URxvt*.iso14755: false
 
 URxvt*.keysym.M-p:           urxvt -cd "$(pwd)" &!\n
 

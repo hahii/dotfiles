@@ -22,14 +22,21 @@ zstyle ':completion:*' menu select
 # cycle backwards through tab completion using shift-tab
 bindkey "${terminfo[kcbt]}" reverse-menu-complete
 
-# case-insensitive tab completion: first try the term from anywhere in the phrase (bird can complete to Blue_Bird), then try each letter after separators (a.b.c can complete to aqua.blue.cfg), then try finding the letters individually anywhere in the phrase as long as they're in order (abc can complete to Far_away_tab_
+# case-insensitive tab completion: first try the term from anywhere in the phrase (bird can complete to Blue_Bird), then try each letter after separators (a.b.c can complete to aqua.blue.cfg), then try finding the letters individually anywhere in the phrase as long as they're in order (abc can complete to far_obstacle)
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z} l:|=* r:|=*' 'm:{a-zA-Z}={A-Za-z} r:|[._-]=** r:|=*' 'm:{a-zA-Z}={A-Za-z} r:|?=**'
+
+# separate tab completion styles for files (anywhere in name) and commands (only start of name). However, you cannot use matcher-list in conjunction with this as it overrides all other matchers globally, so only a single matcher type is possible for each. Not worth it for me but I'll leave it here anyway
+#zstyle ':completion:*' matcher 'm:{a-zA-Z}={A-Za-z} l:|=* r:|=*'
+#zstyle ':completion:*:*:-command-:*' matcher 'm:{a-zA-Z}={A-Za-z}'
 
 # ignore completion functions when tab completing commands
 zstyle ':completion:*:functions' ignored-patterns '_*'
 
 # tab completion uses same colours as LS_COLORS
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+# improved kill completion to show user processes only
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
 
 # tab completion show dot files without specifying the dot
 setopt globdots
@@ -81,10 +88,6 @@ bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
 bindkey '^U' backward-kill-line
 
 
-# improved kill completion to show user processes only
-zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
-
-
 # enable syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
@@ -118,9 +121,9 @@ stty -ixon
 
 export GIMP2_DIRECTORY="$XDG_CONFIG_HOME/gimp"
 export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
-export MEDNAFEN_HOME="$XDG_CONFIG_HOME"/mednafen
-
+export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc-2.0
 export LESSHISTFILE="$XDG_CACHE_HOME/lesshst"
+export ASPELL_CONF="per-conf $XDG_CONFIG_HOME/aspell/aspell.conf; personal $XDG_CONFIG_HOME/aspell/aspell.en.pws; repl $XDG_CONFIG_HOME/aspell/aspell.en.prepl"
 
 # make journalctl clear on exit, add case insensitive search
 export SYSTEMD_LESS="RSMKi"
@@ -141,6 +144,8 @@ alias grep='grep --color=auto'
 
 alias bc='bc -ql'
 
+alias units='units --history ""'
+
 alias ffprobe='ffprobe -hide_banner'
 
 alias stor1='cd /mnt/storagetoshiba/'
@@ -150,12 +155,13 @@ alias stor3='cd /mnt/storage3t/'
 
 # aliases to use .config directory for config files
 
-#alias anki='anki -b ~/.config/anki'
 alias vim='vim -u ~/.config/vim/vimrc'
 alias vimdiff='vimdiff -u ~/.config/vim/vimrc'
 alias weechat='weechat -d ~/.config/weechat'
 alias tmsu='tmsu --database=$XDG_DATA_HOME/tmsu/wallpaperdb'
 alias qmv='qmv -e "vim -u ~/.config/vim/vimrc" -f do'
+alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
+alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/nvidia-settings-rc'
 
 
 # functions

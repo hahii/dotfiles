@@ -5,6 +5,7 @@ set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
 set directory=~/.cache/vim/swap//,/tmp
 set viminfo+=<1000				" copy up to 1000 lines (default 50)
 set viminfo+=n~/.local/share/vim/viminfo	" old sessions will use and recreate old location, this MUST BE THE LAST SET VIMINFO
+set packpath+=$XDG_CONFIG_HOME/vim		" location to find the pack directory where plugins are installed
 
 
 set backspace=indent,eol,start " allow backspacing over everything in insert mode
@@ -115,14 +116,6 @@ map <silent> = :bnext<CR>
 
 " faster substitute command
 map K :%s/
-
-" these do not mess up indentation like some methods of pasting
-" middle click style paste
-nmap <C-J> "*p
-imap <C-J> <C-O>"*p
-" ctrl+v style paste
-nmap <C-H> "+p
-imap <C-H> <C-O>"+p
 
 " ctrl-U in insert mode cannot be undone unless we break the undo with ctrl-g u
 inoremap <C-U> <C-G>u<C-U>
