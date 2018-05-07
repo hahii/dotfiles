@@ -1,27 +1,30 @@
-set nocompatible	" Vi incompatible settings (must be first as it affects other options)
+if !has('nvim')			" Settings that only need to apply to original vim
+	set nocompatible	" Vi incompatible settings (must be first as it affects other options)
 
-" change .vim, swap, backup, viminfo directories
-set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
-set directory=~/.cache/vim/swap//,/tmp
-set viminfo+=<1000				" copy up to 1000 lines (default 50)
-set viminfo+=n~/.local/share/vim/viminfo	" old sessions will use and recreate old location, this MUST BE THE LAST SET VIMINFO
-set packpath+=$XDG_CONFIG_HOME/vim		" location to find the pack directory where plugins are installed
+	set runtimepath=$XDG_CONFIG_HOME/vim,$VIM,$VIMRUNTIME,$XDG_CONFIG_HOME/vim/after	" .vim config directory
+	set directory=~/.cache/vim/swap//,/tmp		" swap file directory
+	set history=1000				" lines of command and search history kept
+	set viminfo+=<1000				" possible to copy up to 1000 lines (default 50)
+	set viminfo+=n~/.local/share/vim/viminfo	" viminfo directory, old sessions will use and recreate old location, this MUST BE THE LAST SET VIMINFO
+	set packpath+=$XDG_CONFIG_HOME/vim		" location to find the pack directory where plugins are installed
+
+	set backspace=indent,eol,start			" allow backspacing over everything in insert mode
+	set autoindent					" auto indent on newline if starting from indent
+	set showcmd					" display incomplete commands in bottom right
+	set laststatus=2				" always show statusline
+	set hlsearch					" search result highlighting
+	set incsearch					" show matches while typing search pattern
+endif
 
 
-set backspace=indent,eol,start " allow backspacing over everything in insert mode
+
 set hidden		" allow multiple files by hiding instead of closing
-set history=1000	" lines of : history kept
-set autoindent		" auto indent on newline if starting from indent
-set wrap		" enable line wrap
 set linebreak		" wrap lines at end of word rather than mid
 set ttimeoutlen=0	" allows exiting insert mode instantly and removes lag on O, may cause issues with key combinations
 set spelllang=en_ca,cjk " Canadian spellcheck, ignore east asian
-set mouse=a		" enable mouse in all modes
-
-set hlsearch		" search result highlighting
-set incsearch		" show matches while typing search pattern
 set ignorecase		" case insensitive searching
 set smartcase		" disable ignorecase when inputting uppercase
+set mouse=a		" enable mouse in all modes
 
 set scrolloff=5		" minimum visible lines above and below cursor
 set number		" number lines
@@ -29,10 +32,12 @@ set relativenumber	" lines are numbered relative to current line, useful for cal
 set cursorline		" highlight current line
 set shortmess+=I	" disable intro message when opening vim
 
-
-set showcmd		" display incomplete commands in bottom right
-set laststatus=2	" always show statusline
 set statusline=%<%F\ (%LL)\ %#WarningMsg#%M%#ErrorMsg#%R%##%=%y[%{&ff}][%{&fenc}]\ %4P
+
+set backup		" keep a backup file
+set backupdir=$XDG_CACHE_HOME/vim/backup
+" set backup files to contain timestamp in format _YYYYMMDD-HHMM
+au BufWritePre * let &backupext = '_' . strftime("%Y%m%d-%H%M")
 
 
 syntax on		" syntax highlighting
@@ -40,11 +45,6 @@ colorscheme custom_dark
 
 " automatically enable the Colorizer plugin for certain filetypes, note it's laggy for huge files
 " let g:colorizer_auto_filetype='css,html'
-
-" set backup files to contain timestamp in format _YYYYMMDD-HHMM
-set backup		" keep a backup file
-set backupdir=$XDG_CACHE_HOME/vim/backup
-au BufWritePre * let &backupext = '_' . strftime("%Y%m%d-%H%M")
 
 
 " set leader key to something else so we can use backslash without conflict
@@ -87,7 +87,7 @@ map <F8> :so $VIMRUNTIME/syntax/hitest.vim<CR>
 
 " open CtrlP buffer list
 map <Space> :CtrlPBuffer<CR>
-" open CtrlP MRU list. 
+" open CtrlP MRU list.
 map <F9> :CtrlPMRU<CR>
 " open CtrlP MRU list. for some reason NUL is ctrl-space
 "map <NUL> :CtrlPMRU<CR>
