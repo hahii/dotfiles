@@ -87,6 +87,17 @@ bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
 # delete from cursor to start of line (default in bash), instead of delete entire line (default in zsh)
 bindkey '^U' backward-kill-line
 
+# ctrl-z is handled directly by the terminal to suspend the process currently in the foreground, so this only applies at the zsh input
+# the purpose of this is to double tap ctrl-z to quickly bg a suspended process so it continues running in the background instead of just being suspended
+background-ctrl-z () {
+	bg
+	# required in order to show the zsh input again properly
+	zle redisplay
+}
+# create a user-defined widget and bind it to ctrl-z
+zle -N background-ctrl-z
+bindkey '^Z' background-ctrl-z
+
 
 # enable syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -119,7 +130,6 @@ stty -ixon
 
 # Exporting some variables to make some stuff use .config
 
-export GIMP2_DIRECTORY="$XDG_CONFIG_HOME/gimp"
 export GNUPGHOME="$XDG_CONFIG_HOME/gnupg"
 export GTK2_RC_FILES="$XDG_CONFIG_HOME"/gtk-2.0/gtkrc-2.0
 export LESSHISTFILE="$XDG_CACHE_HOME/lesshst"
@@ -148,6 +158,8 @@ alias units='units --history ""'
 
 alias ffprobe='ffprobe -hide_banner'
 
+alias watch='watch --no-title'
+
 alias stor1='cd /mnt/storagetoshiba/'
 alias stor2='cd /mnt/storagewd/backup/'
 alias stor3='cd /mnt/storage3t/'
@@ -167,10 +179,12 @@ alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/nvidia
 # functions
 
 wp() {pkill -f wallpaper-random; /home/hahi/scripts/wallpaper-random "$@" &!}
-t() {until /usr/bin/mpv --vo=opengl --profile=opengl-hq "https://twitch.tv/$1" --ytdl-format=$2 --screenshot-directory="/mnt/storage3t/images/snapshots/stream/" --demuxer-lavf-probe-info=yes --input-conf="~/.config/mpv/stream-input.conf"; do echo "Retrying in 15 seconds."; sleep 15; done}
+t() {/usr/bin/mpv --vo=gpu --profile=gpu-hq "https://twitch.tv/$1" --ytdl-format=$2 --screenshot-directory="/mnt/storage3t/images/snapshots/stream/" --demuxer-lavf-probe-info=yes}
+rt() {until /usr/bin/mpv --vo=gpu --profile=gpu-hq "https://twitch.tv/$1" --ytdl-format=$2 --screenshot-directory="/mnt/storage3t/images/snapshots/stream/" --demuxer-lavf-probe-info=yes; do echo "Retrying in 15 seconds."; sleep 15; done}
 s() {find -iname "*$@*" | sort}
 g() {grep -i "$@" **}
 nocom() {grep "^[^#;]" "$@" | less}
+highlight() {grep --color -E -- "$1|$" "${@:2}"}
 dud() {du -hd1 "$@" | sort -hr}
 dua() {du -had1 "$@" | sort -hr}
 
