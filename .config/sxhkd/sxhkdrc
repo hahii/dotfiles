@@ -38,7 +38,14 @@ super + bracket{left,right}
 
 # change to specified desktop, shift to move window to specified desktop
 super + {_,shift + }{1-7}
-	bspc {desktop --focus,node --to-desktop} ^{6-7,1-5}
+	bspc {desktop --focus,node --to-desktop} ^{1-7}
+
+super + e
+	moveddesk=$(bspc query --nodes --node focused); \
+	bspc desktop --to-monitor next; \
+	bspc monitor DVI-I-1 --reorder-desktops M2A M2B; \
+	bspc monitor HDMI-0 --reorder-desktops M1A M1B M1C M1D M1E; \
+	bspc node --focus $moveddesk
 
 
 
@@ -140,8 +147,10 @@ super + y
 # wm independent hotkeys
 #
 
+#super + Return
+#if [[ $(bspc query -N -n biggest.local) == $(bspc query -N -n .focused.local) ]]; then bspc node --focus prev.local; fi; urxvt &!; sleep 0.1s; bspc node --focus biggest.local && bspc node @brother --balance && bspc node --focus last
 super + Return
-	if [[ $(bspc query -N -n biggest.local) == $(bspc query -N -n .focused.local) ]]; then bspc node --focus prev.local; fi; urxvt &!; sleep 0.1s; bspc node --focus biggest.local && bspc node @brother --balance && bspc node --focus last
+	if [[ $(bspc query -N -n biggest.local) == $(bspc query -N -n .focused.local) ]]; then bspc node --focus prev.local; fi; urxvt
 
 super + z
 	firefox
