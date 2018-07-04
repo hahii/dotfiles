@@ -1,10 +1,9 @@
 color listfocus white black
 color info default default
 browser firefox
+feed-sort-order lastupdated
 
 bind-key j down
 bind-key k up
-bind-key h left
-bind-key l right
 
 include "~/.config/newsboat/killfile"
