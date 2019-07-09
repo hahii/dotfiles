@@ -87,6 +87,41 @@ bindkey "${terminfo[kcud1]}" down-line-or-beginning-search
 # delete from cursor to start of line (default in bash), instead of delete entire line (default in zsh)
 bindkey '^U' backward-kill-line
 
+# Change the way zsh treats forward slashes in path names:
+# test terminfo key names using "sed l" and pressing keys
+# WORDCHARS environment variable sets which characters are considered part of a "word" and therefore skipped by zsh commands that act on "words"
+# forward slash is part of WORDCHARS by default, so the following uses a find and replace to remove it from WORDCHARS just within the function before running a command
+backward-kill-dir () {
+    local WORDCHARS=${WORDCHARS/\/}
+    zle backward-kill-word
+}
+zle -N backward-kill-dir
+# ctrl-w	delete until the previous forward slash
+bindkey '^w' backward-kill-dir
+# alt-w		delete the entire path by skipping over all forward slashes
+bindkey '^[w' backward-kill-word
+
+backward-word-dir () {
+    local WORDCHARS=${WORDCHARS/\/}
+    zle backward-word
+}
+zle -N backward-word-dir
+# ctrl-left	go to previous forward slash
+bindkey '^[Od' backward-word-dir
+# alt-left	go to start of entire path by skipping over all forward slashes
+bindkey '^[^[[D' backward-word
+
+forward-word-dir () {
+    local WORDCHARS=${WORDCHARS/\/}
+    zle forward-word
+}
+zle -N forward-word-dir
+# ctrl-right	go to next forward slash
+bindkey '^[Oc' forward-word-dir
+# alt-right	go to end of entire path by skipping over all forward slashes
+bindkey '^[^[[C' forward-word
+
+
 # ctrl-z is handled directly by the terminal to suspend the process currently in the foreground, so this only applies at the zsh input
 # the purpose of this is to double tap ctrl-z to quickly bg a suspended process so it continues running in the background instead of just being suspended
 background-ctrl-z () {
@@ -101,6 +136,9 @@ bindkey '^Z' background-ctrl-z
 
 # enable syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# enable autosuggestions
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # incorrect command
 ZSH_HIGHLIGHT_STYLES[unknown-token]='fg=red,bold'
@@ -123,7 +161,8 @@ ZSH_HIGHLIGHT_STYLES[double-hyphen-option]='fg=white,bold'
 ZSH_HIGHLIGHT_STYLES[single-quoted-argument]='fg=white,bold'
 ZSH_HIGHLIGHT_STYLES[double-quoted-argument]='fg=white,bold'
 
-
+# disable zsh builtin "r" command (pointless alias for !! that's easy to accidentally type) 
+disable r
 
 # prevent ctrl-s from freezing terminal
 stty -ixon
@@ -154,7 +193,7 @@ alias grep='grep --color=auto'
 
 alias bc='bc -ql'
 
-alias units='units --history ""'
+alias units='units --history "" --digits max'
 
 alias ffprobe='ffprobe -hide_banner'
 
@@ -167,11 +206,12 @@ alias stor3='cd /mnt/storage3t/'
 
 # aliases to use .config directory for config files
 
-alias vim='vim -u ~/.config/vim/vimrc'
+alias qmv='qmv -e "nvim" -f do'
+alias originalvim='vim -u ~/.config/vim/vimrc'
+alias vim='nvim'
 alias vimdiff='vimdiff -u ~/.config/vim/vimrc'
 alias weechat='weechat -d ~/.config/weechat'
 alias tmsu='tmsu --database=$XDG_DATA_HOME/tmsu/wallpaperdb'
-alias qmv='qmv -e "vim -u ~/.config/vim/vimrc" -f do'
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/nvidia-settings-rc'
 
@@ -179,10 +219,11 @@ alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/nvidia
 # functions
 
 wp() {pkill -f wallpaper-random; /home/hahi/scripts/wallpaper-random "$@" &!}
-t() {/usr/bin/mpv --vo=gpu --profile=gpu-hq "https://twitch.tv/$1" --ytdl-format=$2 --screenshot-directory="/mnt/storage3t/images/snapshots/stream/" --demuxer-lavf-probe-info=yes}
-rt() {until /usr/bin/mpv --vo=gpu --profile=gpu-hq "https://twitch.tv/$1" --ytdl-format=$2 --screenshot-directory="/mnt/storage3t/images/snapshots/stream/" --demuxer-lavf-probe-info=yes; do echo "Retrying in 15 seconds."; sleep 15; done}
-s() {find -iname "*$@*" | sort}
-g() {grep -i "$@" **}
+t() {/usr/bin/mpv --vo=gpu --profile=gpu-hq "https://twitch.tv/$1" --ytdl-format=$2 --demuxer-lavf-probe-info=yes}
+rt() {until /usr/bin/mpv --vo=gpu --profile=gpu-hq "https://twitch.tv/$1" --ytdl-format=$2 --demuxer-lavf-probe-info=yes; do echo "Retrying in 15 seconds."; sleep 15; done}
+s() {find -iname "*$@*" | sort --ignore-case}
+g() {grep --ignore-case "$@" **}
+h() {history -i 1 | grep --ignore-case "$@"}
 nocom() {grep "^[^#;]" "$@" | less}
 highlight() {grep --color -E -- "$1|$" "${@:2}"}
 dud() {du -hd1 "$@" | sort -hr}
