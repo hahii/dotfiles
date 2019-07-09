@@ -11,5 +11,5 @@ hi Comment ctermfg=248					" comment lines in code
 hi WarningMsg cterm=bold ctermfg=1			" warning messages
 
 " change colours when entering/leaving insert mode
-au InsertEnter * hi CursorLine cterm=none ctermbg=0 | hi CursorLineNr ctermfg=141 | hi StatusLine ctermfg=141
-au InsertLeave * hi CursorLine cterm=none ctermbg=234 | hi CursorLineNr ctermfg=255 | hi StatusLine ctermfg=255
+autocmd InsertEnter * hi CursorLine cterm=none ctermbg=0 | hi CursorLineNr ctermfg=141 | hi StatusLine ctermfg=141
+autocmd InsertLeave * hi CursorLine cterm=none ctermbg=234 | hi CursorLineNr ctermfg=255 | hi StatusLine ctermfg=255

@@ -14,6 +14,11 @@ if !has('nvim')			" Settings that only need to apply to original vim
 	set laststatus=2				" always show statusline
 	set hlsearch					" search result highlighting
 	set incsearch					" show matches while typing search pattern
+elseif has('nvim')
+	set inccommand=nosplit				" substitute live preview
+
+	set formatoptions=tcq				" dont auto comment when starting a newline from a comment
+	filetype plugin indent off			" dont auto newline after a certain line length
 endif
 
 
@@ -34,10 +39,12 @@ set shortmess+=I	" disable intro message when opening vim
 
 set statusline=%<%F\ (%LL)\ %#WarningMsg#%M%#ErrorMsg#%R%##%=%y[%{&ff}][%{&fenc}]\ %4P
 
-set backup		" keep a backup file
-set backupdir=$XDG_CACHE_HOME/vim/backup
+set undofile		" persistent undo history after closing
+set undodir=/tmp/vimundo
+" set backup		" keep a backup file
+" set backupdir=$XDG_CACHE_HOME/vim/backup
 " set backup files to contain timestamp in format _YYYYMMDD-HHMM
-au BufWritePre * let &backupext = '_' . strftime("%Y%m%d-%H%M")
+" autocmd BufWritePre * let &backupext = '_' . strftime("%Y%m%d-%H%M")
 
 
 syntax on		" syntax highlighting
@@ -47,7 +54,7 @@ colorscheme custom_dark
 " let g:colorizer_auto_filetype='css,html'
 
 
-" set leader key to something else so we can use backslash without conflict
+" set leader key to something to use backslash without conflict
 let mapleader="Z"
 
 " toggle spellcheck
@@ -55,6 +62,11 @@ map s :set spell! spell?<CR>
 
 " turn off current search highlighting
 map <silent> ` :nohlsearch<CR>
+
+" set nerdtree options
+let g:NERDTreeSortHiddenFirst=0
+let g:NERDTreeMinimalUI=1
+let g:NERDTreeShowHidden=1
 
 " browse current working directory
 map <silent> <F1> :e .<CR>
@@ -97,6 +109,9 @@ map <F9> :CtrlPMRU<CR>
 " toggle Colorizer plugin
 map <F10> :ColorToggle<CR>
 
+" show file's git backup history
+map <F11> :call OpenCurrentFileBackupHistory()<CR>
+
 " backspace and backslash go backwards and forwards in cursor location
 noremap <BS> <C-o>
 noremap <Bslash> <C-i>
@@ -109,6 +124,9 @@ map q :q<CR>
 
 " replace Q EX mode with record macro
 noremap Q q
+
+" yank to system clipboard
+map Y "*y
 
 " change buffers
 map <silent> - :bprev<CR>
@@ -125,12 +143,6 @@ inoremap <C-U> <C-G>u<C-U>
 iabbrev teh the
 
 
-" always jump to the last known cursor position unless invalid or first line
-autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif
-
 
 " command to see unsaved changes to current file
 if !exists(":DiffOrig")
@@ -142,8 +154,19 @@ endif
 
 set sessionoptions=blank,buffers,folds,help,tabpages,winsize " prevent sessions from saving options and working directory
 
-" autoload the session when running vim
-au VimEnter * nested :call sessionpersist#LoadSession()
+augroup open_and_close_events
+	" clear all existing autocommands so duplicates aren't created when sourcing the vimrc file again
+	autocmd!
 
-" autosave the session on exiting vim
-au VimLeave * nested :call sessionpersist#UpdateSession()
+	" always jump to the last known cursor position unless invalid or first line
+	autocmd BufReadPost *
+	    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+	    \   exe "normal! g`\"" |
+	    \ endif
+
+	" autoload the session when running vim
+	autocmd VimEnter * nested :call sessionpersist#LoadSession()
+
+	" autosave the session on exiting vim
+	autocmd VimLeave * nested :call sessionpersist#UpdateSession()
+augroup END
