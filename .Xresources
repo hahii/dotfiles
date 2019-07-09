@@ -4,14 +4,21 @@ Xcursor.size: 25
 URxvt*.scrollBar: false
 URxvt*.font: xft:envy code r:size=9, xft:umeplus p gothic:size=9
 
+URxvt*.foreground: #F8F8F8
+! URxvt*.colorUL: #FF99CC
+
 ! non-composited transparency
 ! URxvt*.transparent: true
 ! transparency darken 0-99 or lighten 101-200
 ! URxvt*.shading: 50 
 
 ! composited transparency
-URxvt*.depth: 32
-URxvt*.background: [50]#000000
+!URxvt*.depth: 32
+!URxvt*.background: [50]#000000
+
+! no transparency
+URxvt*.background: #151515
+
 
 ! plugins
 URxvt*.perl-ext-common:      default,url-select,keyboard-select,matcher
@@ -40,9 +47,6 @@ URxvt*.iso14755: false
 
 URxvt*.keysym.M-p:           urxvt -cd "$(pwd)" &!\n
 
-URxvt*.foreground: #F8F8F8
-! URxvt*.background: #282828
-! URxvt*.colorUL: #FF99CC
 
 URxvt*.color0: #2A0150
 URxvt*.color1: #FF2457
