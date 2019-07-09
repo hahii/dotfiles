@@ -22,9 +22,9 @@ bspc wm --reorder-monitors DVI-I-1 HDMI-0
 
 
 # application rules
-bspc rule -a Firefox desktop=^1 private=on
-bspc rule -a qemu-system-i386 state=floating
+bspc rule -a Firefox private=on
 bspc rule -a mpv private=on
+bspc rule -a qemu-system-i386 state=floating
 
 
 # launch applications

@@ -21,6 +21,12 @@ super + ctrl + v
 super + t
 	bspc desktop --layout next
 
+super + n
+	bspc config window_gap 0; bspc config border_width 0
+
+super + shift + n
+	bspc config window_gap 8; bspc config border_width 2
+
 super + x
 	bspc node --state \~floating
 
@@ -187,6 +193,15 @@ super + shift + {z,x}
 
 super + d
 	~/scripts/timepopup
+
+super + g
+	rofi -modi run,window -show run
+
+super + q
+	~/scripts/searchclip
+
+super + shift + q
+	~/scripts/roficlip
 
 Print
 	maim "/mnt/storage3t/images/snapshots/screen/$(date +%Y-%m-%d-%H%M%S).png"
