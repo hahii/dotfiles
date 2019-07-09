@@ -2,6 +2,7 @@ color listfocus white black
 color info default default
 browser firefox
 feed-sort-order lastupdated
+datetime-format "%Y年%m月%d日"
 
 bind-key j down
 bind-key k up

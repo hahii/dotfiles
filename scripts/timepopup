@@ -7,4 +7,4 @@ for i in $(seq 1 ${popup_duration}); do \
 	TZ="Japan" date +"%Y年%-m月%-d日（%a） %H:%M:%S %Z"; \
 	sleep 1; \
 done \
-| dzen2 -w 400 -h 50 -x 20 -y 20 -fg '#282828' -bg '#ff99cc' -fn '-*-ipapgothic-medium-r-normal--13-*-*-*-*-*-iso10646-1' -l 2 -u -sa c
+| dzen2 -w 400 -h 50 -x 20 -y 20 -fg '#282828' -bg '#F8F8F8' -fn '-*-ipapgothic-medium-r-normal--13-*-*-*-*-*-iso10646-1' -l 2 -u -sa c

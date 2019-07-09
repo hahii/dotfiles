@@ -42,9 +42,8 @@ setxkbmap -option caps:swapescape
 #this is required to fix cursor for bspwm, not sure why it isn't needed with dwm
 xsetroot -cursor_name left_ptr &
 
-#compositing for vsync, paint-on-overlay and glx-no-stencil improve performance, xrender-syncs fix issues
-compton --config /dev/null --backend glx --vsync opengl-swc --paint-on-overlay --glx-no-stencil --xrender-sync --xrender-sync-fence -b
-# compton --config /dev/null --backend glx --vsync opengl-swc --paint-on-overlay --glx-no-stencil --xrender-sync --xrender-sync-fence &!
+#compositing for vsync, glx-no-stencil improves performance, xrender-sync-fence fixes issues
+compton --config /dev/null --backend glx --vsync --glx-no-stencil --xrender-sync-fence -b
 
 #start clipboard manager
 clipster -d &
